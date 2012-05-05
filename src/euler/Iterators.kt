@@ -2,11 +2,15 @@ package euler.iterators
 
 import euler.bigInt
 import euler.isPrime
+import euler.minus
+import euler.plus
 
 import java.math.BigInteger
 import java.util.Iterator
+import java.util.List
 
 import kotlin.math.plus
+import kotlin.support.SingleIterator
 
 fun primes(): Iterator<Long> {
   var number = 2.toLong()
@@ -106,4 +110,16 @@ fun String.sliding(size: Int): Iterator<String> {
   }
 
   return iterate<String> { nextWindow() }
+}
+
+fun <T : Any> List<T>.permutations() : Iterator<List<T>> = if (size == 1) SingleIterator(this) else {
+  var accumulator = arrayList<List<T>>()
+  for (head in this) for (permutation in (this - head).permutations()) accumulator.add(head + permutation)
+  accumulator.iterator()
+}
+
+fun <T> java.util.Iterator<T>.get(index: Int): T {
+  var size = 0
+  while (size < index && hasNext()) { next(); ++size }
+  return if (hasNext()) next() else throw IndexOutOfBoundsException("Index $index, Size: $size")
 }

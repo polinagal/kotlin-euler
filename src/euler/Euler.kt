@@ -106,13 +106,6 @@ inline fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): #(
 }
 
 // candidates for kotlin.util
-inline fun <T: Any> List<T>.permutations(): List<List<T>> {
-  return if (isEmpty()) arrayList(this) else {
-    val result = ArrayList<List<T>>()
-    for (head in this) for (permutation in (this - head).permutations()) result.add(head + permutation)
-    return result
-  }
-}
 
 inline fun <T: Any> List<T>.rotations(): List<List<T>> {
   val result = arrayList<List<T>>(this)
