@@ -7,7 +7,7 @@ import java.util.List
 fun main(args : Array<String>) {
     val numbers = ArrayList<List<Int>>()
 
-    File("Problem-0011.txt").forEachLine("UTF-8") {
+    File("src/data/Problem-0011.txt").forEachLine(charset = "UTF-8") {
         numbers.add(it.split(" ").map {it.toInt()})
     }
 

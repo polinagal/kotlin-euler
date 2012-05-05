@@ -4,7 +4,7 @@ import java.io.File
 
 fun main(args : Array<String>) {
   // average execution time of 1.7986 milliseconds over 10 iterations
-  val words = File("src/euler/Problem-0042.txt").readText(encoding = "UTF-8").substring(1).split("\"(,\")?")
+  val words = File("src/data/Problem-0042.txt").readText(encoding = "UTF-8").substring(1).split("\"(,\")?")
   val triangles = hashSet(*Array<Int>(100) { (0.5 * it * (it + 1)).toInt() })
   val triangleWords = words.filter { triangles.contains(it.wordValue()) }
 

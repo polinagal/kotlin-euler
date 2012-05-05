@@ -9,7 +9,7 @@ fun main(args : Array<String>) {
     var prevLine : List<Int> = arrayList(0, 0)
     var currLine : List<Int> = arrayList(0)
 
-    File("Problem-0067.txt").forEachLine("UTF-8") {
+    File("src/data/Problem-0067.txt").forEachLine(charset = "UTF-8") {
         val values : List<Int> = it.split(" ").map {it.toInt()}
 
         for (idx in values.indices) {
