@@ -113,9 +113,20 @@ fun String.sliding(size: Int): Iterator<String> {
 }
 
 fun <T : Any> List<T>.permutations() : Iterator<List<T>> = if (size == 1) SingleIterator(this) else {
-  var accumulator = arrayList<List<T>>()
-  for (head in this) for (permutation in (this - head).permutations()) accumulator.add(head + permutation)
-  accumulator.iterator()
+  val iterator = iterator()
+  var head = iterator.next()
+  var permutations = (this - head).permutations()
+
+  fun nextPermutation(): List<T>? = if (permutations.hasNext()) head + permutations.next() else {
+    if (iterator.hasNext()) {
+      head = iterator.next()
+      permutations = (this - head).permutations()
+//      nextPermutation() // TODO: raise compiler bug - VerifyError: Accessing value from uninitialized register 4
+      head + permutations.next()
+    } else null
+  }
+
+  iterate { nextPermutation() }
 }
 
 fun <T> java.util.Iterator<T>.get(index: Int): T {
