@@ -13,6 +13,12 @@ inline fun Any.toCharList() = toString().iterator().toArrayList()
 inline fun Any.toDigits() = toCharList().map { (c: Char) -> Character.getNumericValue(c) }
 inline fun Any.isPalindrome() = toCharList() == toCharList().reverse()
 
+inline fun String.fold(seed: Int, operation: (Int, Int) -> Int): Int {
+  var accumulator = seed
+  for (char in this) accumulator = (operation)(accumulator, char.toInt())
+  return accumulator
+}
+
 // candidates for kotlin.math
 inline fun <T: Number> bigInt(n: T) = BigInteger(n.toString())
 

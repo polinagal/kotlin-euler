@@ -5,9 +5,11 @@ import euler.isPrime
 import euler.minus
 import euler.plus
 
+import java.io.File
 import java.math.BigInteger
 import java.util.Iterator
 import java.util.List
+import java.util.Scanner
 
 import kotlin.math.plus
 import kotlin.support.SingleIterator
@@ -127,6 +129,12 @@ fun <T : Any> List<T>.permutations() : Iterator<List<T>> = if (size == 1) Single
   }
 
   iterate { nextPermutation() }
+}
+
+fun File.scan(pattern : String = ".*", delimiter: String, encoding: String = "UTF-8"): Iterator<String> {
+  val scanner = Scanner(this, encoding)
+  scanner.useDelimiter(delimiter)
+  return iterate { if (scanner.hasNext(pattern)) scanner.next(pattern) else { scanner.close(); null } }
 }
 
 fun <T> java.util.Iterator<T>.get(index: Int): T {
