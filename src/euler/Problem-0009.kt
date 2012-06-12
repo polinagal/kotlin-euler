@@ -17,5 +17,5 @@ fun main(args : Array<String>) {
 inline fun pythagoreanTripletAddingUpTo(sum: Int): #(Int, Int, Int) {
   val range = Math.sqrt(sum.toDouble()).toInt()..sum
   fun isPythagorean(a: Int, b: Int, c: Int) = (a * a + b * b == c * c) && a < b && b < c
-  return (range findTriplet { (a, b, c) -> isPythagorean(a, b, c) && a + b + c == sum }).sure()
+  return range.findTriplet { (a, b, c) -> isPythagorean(a, b, c) && a + b + c == sum }!!
 }

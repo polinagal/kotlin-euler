@@ -62,10 +62,10 @@ fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<#(T, T)> {
 
   fun nextPair(): #(T, T)? {
     if (a == null && first.hasNext) a = first.next()
-    if (second.hasNext) return #(a.sure(), second.next())
+    if (second.hasNext) return #(a!!, second.next())
     if (first.hasNext) {
       a = first.next(); second = other.iterator()
-      return #(a.sure(), second.next())
+      return #(a!!, second.next())
     }
     return null
   }

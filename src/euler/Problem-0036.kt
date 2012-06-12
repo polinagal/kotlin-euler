@@ -7,7 +7,7 @@ fun main(args : Array<String>) {
   val limit = 1000000
 
   // average execution time of 263.3206 milliseconds over 10 iterations
-  val result = (1..limit).filter { it.isPalindrome() && Integer.toBinaryString(it).sure().isPalindrome() }
+  val result = (1..limit).filter { it.isPalindrome() && Integer.toBinaryString(it)!!.isPalindrome() }
 
   println("the sum of all numbers, less than $limit, which are palindromic in base 10 and base 2 is sum$result = ${result.sum()}")
 }
