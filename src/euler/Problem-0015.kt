@@ -1,39 +1,17 @@
 package euler.problem0015
 
-import java.util.HashMap
-
 fun main(args : Array<String>) {
-    println(routes(#(20, 20)))
+  val size = 20
+
+  // average execution time of 0.0178 milliseconds over 10 iterations
+  val result = SquareGrid(size).numberOfNonBacktrackingRoutes()
+
+  println("there are $result routes through a $size x $size grid")
 }
 
-fun routes(val size : #(Int, Int)) : Long {
-    if (size._1 < 1 || size._2 < 1) {
-        return 0.toLong()
-    }
+// see http://blog.functionalfun.net/2008/07/project-euler-problem-15-city-grids-and.html
+class SquareGrid(val size: Int) {
+  fun numberOfNonBacktrackingRoutes(): Long = pascal(2 * size, size)
 
-    if (routesCache.containsKey(size)) {
-        return routesCache[size]!!
-    }
-
-    val stripeRoutes = stripeRoutes(size)
-    if(stripeRoutes > 0) {
-        return stripeRoutes
-    }
-
-    val result = routes(#(size._1 - 1, size._2)) + routes(#(size._1, size._2 - 1))
-    routesCache.put(size, result)
-
-    return result
+  private fun pascal(row: Int, col: Int): Long = if (col == 0) 1 else (row + 1 - col) * pascal(row, col - 1) / col
 }
-
-/**
-Returns 0 if it is not a stripe
-*/
-fun stripeRoutes(val size : #(Int, Int)) : Long {
-    return if (size._1 == 1) size._2 + 1.toLong()
-    else if (size._2 == 1) size._1 + 1.toLong()
-    else 0.toLong()
-}
-
-val routesCache = HashMap<#(Int, Int), Long>(800)
-
