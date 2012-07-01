@@ -137,8 +137,21 @@ fun File.scan(pattern : String = ".*", delimiter: String, encoding: String = "UT
   return iterate { if (scanner.hasNext(pattern)) scanner.next(pattern) else { scanner.close(); null } }
 }
 
-fun <T> java.util.Iterator<T>.get(index: Int): T {
+fun <T : Any> java.util.Iterator<T>.get(index: Int): T {
   var size = 0
   while (size < index && hasNext()) { next(); ++size }
   return if (hasNext()) next() else throw IndexOutOfBoundsException("Index $index, Size: $size")
+}
+
+fun <A : Any, B : Any, C : Any> zipWith(f: (A, B) -> C,
+                                        it1: java.util.Iterator<A>,
+                                        it2: java.util.Iterator<B>): java.util.Iterator<C> = iterate {
+  if (it1.hasNext() && it2.hasNext()) f(it1.next(), it2.next()) else null
+}
+
+fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
+                                                  it1: java.util.Iterator<A>,
+                                                  it2: java.util.Iterator<B>,
+                                                  it3: java.util.Iterator<C>): java.util.Iterator<D> = iterate {
+  if (it1.hasNext() && it2.hasNext() && it3.hasNext()) f(it1.next(), it2.next(), it3.next()) else null
 }

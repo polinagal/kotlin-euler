@@ -1,26 +1,22 @@
 package euler.problem0067
 
-import java.util.List
-import java.util.ArrayList
 import java.io.File
-import euler.max
+import java.lang.Math.max
+import java.util.ArrayList
+import java.util.List
 
-fun main(args : Array<String>) {
-    var prevLine : List<Int> = arrayList(0, 0)
-    var currLine : List<Int> = arrayList(0)
+import euler.foldRight1
+import euler.loadRowsFrom
+import euler.zipWith3
 
-    // average execution time of 4.3958 milliseconds over 10 iterations
-    File("src/data/Problem-0067.txt").forEachLine(charset = "UTF-8") {
-        val values : List<Int> = it.split(" ").map {it.toInt()}
+fun main(args: Array<String>) {
+  val triangle = loadRowsFrom(File("src/data/Problem-0067.txt"))
 
-        for (idx in values.indices) {
-            currLine.add(values[idx] + Math.max(prevLine[idx], prevLine[idx + 1]))
-        }
+  // see http://www.haskell.org/haskellwiki/Euler_problems/11_to_20#Problem_18
+  val f = { (x: Int, y: Int, z: Int) -> x + max(y, z).toInt() }
+  val g = { (row1: List<Int>, row2: List<Int>) -> zipWith3(f, row1, row2, row2.tail as List<Int>) }
 
-        currLine.add(0)
-        prevLine = currLine
-        currLine = arrayList(0)
-    }
-
-    println(prevLine.max())
+  // average execution time of 0.7373 milliseconds over 10 iterations
+  val result = triangle.foldRight1(g).first()
+  println("the maximum total from top to bottom of the triangle is $result")
 }

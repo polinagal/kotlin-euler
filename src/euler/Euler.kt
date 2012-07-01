@@ -1,9 +1,13 @@
 package euler
 
+import java.io.File
 import java.math.BigInteger
 import java.util.ArrayList
 import java.util.LinkedList
 import java.util.List
+
+import euler.iterators.zipWith
+import euler.iterators.zipWith3
 
 import kotlin.math.plus
 import kotlin.math.times
@@ -118,14 +122,33 @@ inline fun Array<Float>.max() = fold(0.toFloat()) { (a, b: Float) -> Math.max(a,
 inline fun Array<Double>.max() = fold(0.toDouble()) { (a, b: Double) -> Math.max(a, b) }
 inline fun Array<Long>.max() = fold(0.toLong()) { (a, b: Long) -> Math.max(a, b) }
 
-inline fun <T: Any> Iterable<T>.findPair(predicate: (T, T) -> Boolean): #(T, T)? {
+fun <T: Any> Iterable<T>.findPair(predicate: (T, T) -> Boolean): #(T, T)? {
   for (a in this) for (b in this) if ((predicate)(a, b)) return #(a, b)
   return null
 }
 
-inline fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): #(T, T, T)? {
+fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): #(T, T, T)? {
   for (a in this) for (b in this) for (c in this) if ((predicate)(a, b, c)) return #(a, b, c)
   return null
+}
+
+fun <A : Any, B : Any, C : Any> zipWith(f: (A, B) -> C,
+                                        iterable1: java.lang.Iterable<A>,
+                                        iterable2: java.lang.Iterable<B>): List<C> {
+  return zipWith(f, iterable1.iterator(), iterable2.iterator()).toList()
+}
+
+fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
+                                                  iterable1: java.lang.Iterable<A>,
+                                                  iterable2: java.lang.Iterable<B>,
+                                                  iterable3: java.lang.Iterable<C>): List<D> {
+  return zipWith3(f, iterable1.iterator(), iterable2.iterator(), iterable3.iterator()).toList()
+}
+
+fun <T : Any> java.lang.Iterable<T>.foldRight1(operation : (T, T) -> T): T {
+  val copy = toLinkedList()
+  val seed = copy.removeLast()
+  return copy.foldRight(seed, operation)
 }
 
 // candidates for kotlin.util
@@ -150,4 +173,12 @@ inline fun <T: Any> List<T>.minus(element: T): List<T> {
   val copy = ArrayList(this)
   copy.remove(element)
   return copy
+}
+
+// miscellaneous
+
+fun loadRowsFrom(file: File): List<List<Int>> {
+  val rows = ArrayList<List<Int>>()
+  file.forEachLine(charset = "UTF-8") { rows.add(it.split(" ").map { it.toInt() }) }
+  return rows
 }
