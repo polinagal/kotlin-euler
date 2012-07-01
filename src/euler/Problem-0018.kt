@@ -9,6 +9,7 @@ fun main(args : Array<String>) {
     var prevLine : List<Int> = arrayList(0, 0)
     var currLine : List<Int> = arrayList(0)
 
+    // average execution time of 0.8572 milliseconds over 10 iterations
     File("src/data/Problem-0018.txt").forEachLine(charset = "UTF-8") {
         val values : List<Int> = it.split(" ").map {it.toInt()}
 
@@ -23,6 +24,3 @@ fun main(args : Array<String>) {
 
     println(prevLine.max())
 }
-
-
-
