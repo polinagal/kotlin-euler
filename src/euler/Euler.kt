@@ -151,6 +151,15 @@ fun <T : Any> java.lang.Iterable<T>.foldRight1(operation : (T, T) -> T): T {
   return copy.foldRight(seed, operation)
 }
 
+/**
+ * Returns a list of successive reduced elements from left to right with the *initial* value to perform the operation on sequential pairs of elements
+ */
+fun <T : Any> java.lang.Iterable<T>.scanLeft(initial: T, operation: (T, T) -> T): List<T> {
+  val result = arrayList<T>(initial)
+  forEach { result.add(operation(result.last(), it)) }
+  return result
+}
+
 // candidates for kotlin.util
 
 inline fun <T: Any> List<T>.rotations(): List<List<T>> {
@@ -181,4 +190,10 @@ fun loadRowsFrom(file: File): List<List<Int>> {
   val rows = ArrayList<List<Int>>()
   file.forEachLine(charset = "UTF-8") { rows.add(it.split(" ").map { it.toInt() }) }
   return rows
+}
+
+fun <T : Any> T.replicate(n: Int): List<T> {
+  val result = ArrayList<T>(n)
+  1..n forEach { result.add(this) }
+  return result
 }

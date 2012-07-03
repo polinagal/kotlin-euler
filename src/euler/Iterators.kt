@@ -14,6 +14,11 @@ import java.util.Scanner
 import kotlin.math.plus
 import kotlin.support.SingleIterator
 
+fun range(start: Int, increment: Int = 1): java.util.Iterator<Int> {
+  var current = start
+  return iterate { val next = current; current += increment; next }
+}
+
 fun primes(): Iterator<Long> {
   var number = 2.toLong()
 
