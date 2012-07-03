@@ -152,7 +152,7 @@ fun <T : Any> java.lang.Iterable<T>.foldRight1(operation : (T, T) -> T): T {
 }
 
 /**
- * Returns a list of successive reduced elements from left to right with the *initial* value to perform the operation on sequential pairs of elements
+ * Returns a list starting with the *initial* value followed by the intermediary result of reducing sequential pairs of elements from left to right
  */
 fun <T : Any> java.lang.Iterable<T>.scanLeft(initial: T, operation: (T, T) -> T): List<T> {
   val result = arrayList<T>(initial)
