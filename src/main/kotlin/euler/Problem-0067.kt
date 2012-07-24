@@ -10,7 +10,7 @@ import euler.loadRowsFrom
 import euler.zipWith3
 
 fun main(args: Array<String>) {
-  val triangle = loadRowsFrom(File("src/data/Problem-0067.txt"))
+  val triangle = loadRowsFrom(File("src/main/resources/Problem-0067.txt"))
 
   // see http://www.haskell.org/haskellwiki/Euler_problems/11_to_20#Problem_18
   val f = { (x: Int, y: Int, z: Int) -> x + max(y, z).toInt() }
