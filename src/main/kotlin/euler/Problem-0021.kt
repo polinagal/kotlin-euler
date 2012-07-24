@@ -2,7 +2,7 @@ package euler.problem0021
 
 import euler.sum
 
-fun main(args : Array<String>) {
+fun main(args: Array<String>) {
   val limit = 10000
   // average execution time of 596.9915 milliseconds over 10 iterations
   val amicableNumbers = 1..limit filter { it.hasAmicablePair() }
@@ -14,4 +14,4 @@ inline fun Int.hasAmicablePair(): Boolean {
   return this != candidate && this == candidate.properDivisors().sum()
 }
 
-inline fun Int.properDivisors() = 1 upto this - 1 filter { this % it == 0 }
+inline fun Int.properDivisors() = (1..this - 1) filter { this % it == 0 }
