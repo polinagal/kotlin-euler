@@ -122,13 +122,13 @@ inline fun Array<Float>.max() = fold(0.toFloat()) { (a, b: Float) -> Math.max(a,
 inline fun Array<Double>.max() = fold(0.toDouble()) { (a, b: Double) -> Math.max(a, b) }
 inline fun Array<Long>.max() = fold(0.toLong()) { (a, b: Long) -> Math.max(a, b) }
 
-fun <T: Any> Iterable<T>.findPair(predicate: (T, T) -> Boolean): #(T, T)? {
-  for (a in this) for (b in this) if ((predicate)(a, b)) return #(a, b)
-  return null
-}
+// cartesian products
 
-fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): #(T, T, T)? {
-  for (a in this) for (b in this) for (c in this) if ((predicate)(a, b, c)) return #(a, b, c)
+class Pair<T: Any>(val first: T, val second: T)
+class Triplet<T: Any>(val first: T, val second: T, val third: T)
+
+fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): Triplet<T>? {
+  for (a in this) for (b in this) for (c in this) if ((predicate)(a, b, c)) return Triplet(a, b, c)
   return null
 }
 

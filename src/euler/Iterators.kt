@@ -3,6 +3,7 @@ package euler.iterators
 import euler.bigInt
 import euler.isPrime
 import euler.minus
+import euler.Pair
 import euler.plus
 
 import java.io.File
@@ -31,51 +32,53 @@ fun primes(): Iterator<Long> {
   return iterate<Long> { nextPrime() }
 }
 
+class FibonacciTerm(val index: Int, val value: BigInteger)
+
 fun fibonacci(): Iterator<BigInteger> {
   val iterator = fibonacciWithIndices().iterator()
-  return iterate<BigInteger> { iterator.next()._2 }
+  return iterate<BigInteger> { iterator.next().value }
 }
 
-fun fibonacciWithIndices(): Iterator<#(Int, BigInteger)> {
-  var a = #(0, bigInt(0)); var b = #(1, bigInt(1))
+fun fibonacciWithIndices(): Iterator<FibonacciTerm> {
+  var a = FibonacciTerm(0, bigInt(0)); var b = FibonacciTerm(1, bigInt(1))
 
-  fun nextFibonacci(): #(Int, BigInteger) {
-    val result = #(b._1 + 1, a._2 + b._2); a = b; b = result
+  fun nextFibonacci(): FibonacciTerm {
+    val result = FibonacciTerm(b.index + 1, a.value + b.value); a = b; b = result
     return result
   }
 
-  return iterate<#(Int, BigInteger)> { nextFibonacci() }
+  return iterate<FibonacciTerm> { nextFibonacci() }
 }
 
-fun triangles(): Iterator<#(Int, Int)> {
+fun triangles(): Iterator<Pair<Int>> {
   var n = 0; var sum = 0
 
-  fun nextTriangle(): #(Int, Int) {
+  fun nextTriangle(): Pair<Int> {
     sum += ++n
-    return #(n, sum)
+    return Pair(n, sum)
   }
 
-  return iterate<#(Int, Int)> { nextTriangle() }
+  return iterate { nextTriangle() }
 }
 
 /**
  * Produces the [cartesian product](http://en.wikipedia.org/wiki/Cartesian_product#n-ary_product) as a sequence of ordered pairs of elements lazily obtained
  * from two [[Iterable]] instances
  */
-fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<#(T, T)> {
+fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<Pair<T>> {
   val first = iterator(); var second = other.iterator(); var a: T? = null
 
-  fun nextPair(): #(T, T)? {
+  fun nextPair(): Pair<T>? {
     if (a == null && first.hasNext) a = first.next()
-    if (second.hasNext) return #(a!!, second.next())
+    if (second.hasNext) return Pair(a!!, second.next())
     if (first.hasNext) {
       a = first.next(); second = other.iterator()
-      return #(a!!, second.next())
+      return Pair(a!!, second.next())
     }
     return null
   }
 
-  return iterate<#(T, T)> { nextPair() }
+  return iterate { nextPair() }
 }
 
 /**
