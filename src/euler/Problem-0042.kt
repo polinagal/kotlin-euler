@@ -13,4 +13,4 @@ fun main(args : Array<String>) {
   println("there are ${triangleWords.size()} triangle words: ${triangleWords.makeString(limit = 20)}")
 }
 
-inline fun String.value() : Int = fold(0) { (a, b) -> a + (b - 'A' + 1) }
+inline fun String.value() = fold(0) { (a, b) -> a + (b - 'A' + 1) }

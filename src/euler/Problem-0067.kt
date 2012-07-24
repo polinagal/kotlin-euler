@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
 
   // see http://www.haskell.org/haskellwiki/Euler_problems/11_to_20#Problem_18
   val f = { (x: Int, y: Int, z: Int) -> x + max(y, z).toInt() }
-  val g = { (row1: List<Int>, row2: List<Int>) -> zipWith3(f, row1, row2, row2.tail as List<Int>) }
+  val g = { (row1: List<Int>, row2: List<Int>) -> zipWith3(f, row1, row2, row2.tail) }
 
   // average execution time of 0.7373 milliseconds over 10 iterations
   val result = triangle.foldRight1(g).first()

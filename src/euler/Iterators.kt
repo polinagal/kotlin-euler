@@ -29,14 +29,14 @@ fun primes(): Iterator<Long> {
     return result
   }
 
-  return iterate<Long> { nextPrime() }
+  return iterate { nextPrime() }
 }
 
 class FibonacciTerm(val index: Int, val value: BigInteger)
 
 fun fibonacci(): Iterator<BigInteger> {
   val iterator = fibonacciWithIndices().iterator()
-  return iterate<BigInteger> { iterator.next().value }
+  return iterate { iterator.next().value }
 }
 
 fun fibonacciWithIndices(): Iterator<FibonacciTerm> {
@@ -47,7 +47,7 @@ fun fibonacciWithIndices(): Iterator<FibonacciTerm> {
     return result
   }
 
-  return iterate<FibonacciTerm> { nextFibonacci() }
+  return iterate { nextFibonacci() }
 }
 
 fun triangles(): Iterator<Pair<Int>> {
@@ -98,7 +98,7 @@ fun String.grouped(size: Int): Iterator<String> {
     return null
   }
 
-  return iterate<String> { nextGroup() }
+  return iterate { nextGroup() }
 }
 
 /**
@@ -119,7 +119,7 @@ fun String.sliding(size: Int): Iterator<String> {
     return if (iterator.hasNext) window.deleteCharAt(0)?.append(iterator.next()).toString() else null
   }
 
-  return iterate<String> { nextWindow() }
+  return iterate { nextWindow() }
 }
 
 fun <T : Any> List<T>.permutations() : Iterator<List<T>> = if (size == 1) SingleIterator(this) else {

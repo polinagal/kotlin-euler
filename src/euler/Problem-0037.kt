@@ -31,5 +31,5 @@ inline fun truncate(var string: String, reduce: (String) -> String): Iterator<St
     return current
   }
 
-  return iterate<String> { nextString() }
+  return iterate { nextString() }
 }

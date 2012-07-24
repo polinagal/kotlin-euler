@@ -69,6 +69,6 @@ class Matrix(val size: Int) {
       else null
     }
 
-    return iterate<Int> { next() }.max()
+    return iterate { next() }.max()
   }
 }
