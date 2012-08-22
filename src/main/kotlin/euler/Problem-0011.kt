@@ -60,8 +60,8 @@ class Matrix(val size: Int) {
     var row = rows.next()
 
     fun next(): Int? {
-      if (rows.hasNext) {
-        if (cols.hasNext) return traverser(row, cols.next(), operation)
+      if (rows.hasNext()) {
+        if (cols.hasNext()) return traverser(row, cols.next(), operation)
         row = rows.next()
         cols = (0..numbers.size - 1).iterator()
         return traverser(row, cols.next(), operation)

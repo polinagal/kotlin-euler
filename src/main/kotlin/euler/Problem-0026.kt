@@ -20,4 +20,4 @@ fun main(args : Array<String>) {
 
 class Fraction(val denominator: Long, val period: Int)
 
-inline fun java.util.Iterator<Fraction>.max() = fold(Fraction(0.toLong(), 0)) { (a, b) -> if (a.period > b.period) a else b }
+inline fun Iterator<Fraction>.max() = fold(Fraction(0.toLong(), 0)) { (a, b) -> if (a.period > b.period) a else b }

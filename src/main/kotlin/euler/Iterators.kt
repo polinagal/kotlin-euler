@@ -8,14 +8,13 @@ import euler.plus
 
 import java.io.File
 import java.math.BigInteger
-import java.util.Iterator
 import java.util.List
 import java.util.Scanner
 
 import kotlin.math.plus
 import kotlin.support.SingleIterator
 
-fun range(start: Int, increment: Int = 1): java.util.Iterator<Int> {
+fun range(start: Int, increment: Int = 1): Iterator<Int> {
   var current = start
   return iterate { val next = current; current += increment; next }
 }
@@ -69,9 +68,9 @@ fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<Pair<T>> {
   val first = iterator(); var second = other.iterator(); var a: T? = null
 
   fun nextPair(): Pair<T>? {
-    if (a == null && first.hasNext) a = first.next()
-    if (second.hasNext) return Pair(a!!, second.next())
-    if (first.hasNext) {
+    if (a == null && first.hasNext()) a = first.next()
+    if (second.hasNext()) return Pair(a!!, second.next())
+    if (first.hasNext()) {
       a = first.next(); second = other.iterator()
       return Pair(a!!, second.next())
     }
@@ -90,9 +89,9 @@ fun String.grouped(size: Int): Iterator<String> {
   val iterator = iterator()
 
   fun nextGroup(): String? {
-    if (iterator.hasNext) {
+    if (iterator.hasNext()) {
       val window = StringBuilder()
-      1..size forEach { if (iterator.hasNext) window.append(iterator.next()) }
+      1..size forEach { if (iterator.hasNext()) window.append(iterator.next()) }
       return window.toString()
     }
     return null
@@ -113,10 +112,10 @@ fun String.sliding(size: Int): Iterator<String> {
 
   fun nextWindow(): String? {
     if (window.length() == 0) {
-      1..size forEach { if (iterator.hasNext) window.append(iterator.next()) }
+      1..size forEach { if (iterator.hasNext()) window.append(iterator.next()) }
       return window.toString()
     }
-    return if (iterator.hasNext) window.deleteCharAt(0)?.append(iterator.next()).toString() else null
+    return if (iterator.hasNext()) window.deleteCharAt(0)?.append(iterator.next()).toString() else null
   }
 
   return iterate { nextWindow() }
@@ -145,21 +144,19 @@ fun File.scan(pattern : String = ".*", delimiter: String, encoding: String = "UT
   return iterate { if (scanner.hasNext(pattern)) scanner.next(pattern) else { scanner.close(); null } }
 }
 
-fun <T : Any> java.util.Iterator<T>.get(index: Int): T {
+fun <T : Any> Iterator<T>.get(index: Int): T {
   var size = 0
   while (size < index && hasNext()) { next(); ++size }
   return if (hasNext()) next() else throw IndexOutOfBoundsException("Index $index, Size: $size")
 }
 
-fun <A : Any, B : Any, C : Any> zipWith(f: (A, B) -> C,
-                                        it1: java.util.Iterator<A>,
-                                        it2: java.util.Iterator<B>): java.util.Iterator<C> = iterate {
+fun <A : Any, B : Any, C : Any> zipWith(f: (A, B) -> C, it1: Iterator<A>, it2: Iterator<B>): Iterator<C> = iterate {
   if (it1.hasNext() && it2.hasNext()) f(it1.next(), it2.next()) else null
 }
 
 fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
-                                                  it1: java.util.Iterator<A>,
-                                                  it2: java.util.Iterator<B>,
-                                                  it3: java.util.Iterator<C>): java.util.Iterator<D> = iterate {
+                                                  it1: Iterator<A>,
+                                                  it2: Iterator<B>,
+                                                  it3: Iterator<C>): Iterator<D> = iterate {
   if (it1.hasNext() && it2.hasNext() && it3.hasNext()) f(it1.next(), it2.next(), it3.next()) else null
 }

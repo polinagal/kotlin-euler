@@ -4,8 +4,6 @@ import euler.isPalindrome
 import euler.iterators.times
 import euler.Triplet
 
-import java.util.Iterator
-
 fun main(args : Array<String>) {
   // average execution time of 245.5814 milliseconds over 10 iterations
   val result = (100..999).palindromes().max()

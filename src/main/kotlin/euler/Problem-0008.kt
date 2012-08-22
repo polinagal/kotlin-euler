@@ -4,8 +4,6 @@ import euler.product
 import euler.toDigits
 import euler.iterators.sliding
 
-import java.util.Iterator
-
 fun main(args : Array<String>) {
   val size = 5
   val digits = """

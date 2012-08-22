@@ -4,8 +4,6 @@ import euler.isPrime
 import euler.sum
 import euler.iterators.primes
 
-import java.util.Iterator
-
 fun main(args : Array<String>) {
   val limit = 11
 

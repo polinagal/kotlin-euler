@@ -52,17 +52,11 @@ inline fun Long.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toLong() find {
 // candidates for JavaIterables.kt
 
 // sum
-inline fun java.lang.Iterable<Int>.sum() = fold(0) { (a, b) -> a + b }
-inline fun java.lang.Iterable<Float>.sum() = fold(0.toFloat()) { (a, b) -> a + b }
-inline fun java.lang.Iterable<Double>.sum() = fold(0.toDouble()) { (a, b) -> a + b }
-inline fun java.lang.Iterable<Long>.sum() = fold(0.toLong()) { (a, b) -> a + b }
-inline fun java.lang.Iterable<BigInteger>.sum() = fold(bigInt(0)) { (a, b) -> a + b }
-
-inline fun java.util.Iterator<Int>.sum() = fold(0) { (a, b) -> a + b }
-inline fun java.util.Iterator<Float>.sum() = fold(0.toFloat()) { (a, b) -> a + b }
-inline fun java.util.Iterator<Double>.sum() = fold(0.toDouble()) { (a, b) -> a + b }
-inline fun java.util.Iterator<Long>.sum() = fold(0.toLong()) { (a, b) -> a + b }
-inline fun java.util.Iterator<BigInteger>.sum() = fold(bigInt(0)) { (a, b) -> a + b }
+inline fun Array<Int>.sum() = fold(0) { (a, b: Int) -> a + b }
+inline fun Array<Float>.sum() = fold(0.toFloat()) { (a, b: Float) -> a + b }
+inline fun Array<Double>.sum() = fold(0.toDouble()) { (a, b: Double) -> a + b }
+inline fun Array<Long>.sum() = fold(0.toLong()) { (a, b: Long) -> a + b }
+inline fun Array<BigInteger>.sum() = fold(bigInt(0)) { (a, b: BigInteger) -> a + b }
 
 inline fun Iterable<Int>.sum() = fold(0) { (a, b: Int) -> a + b }
 inline fun Iterable<Float>.sum() = fold(0.toFloat()) { (a, b: Float) -> a + b }
@@ -70,24 +64,18 @@ inline fun Iterable<Double>.sum() = fold(0.toDouble()) { (a, b: Double) -> a + b
 inline fun Iterable<Long>.sum() = fold(0.toLong()) { (a, b: Long) -> a + b }
 inline fun Iterable<BigInteger>.sum() = fold(bigInt(0)) { (a, b: BigInteger) -> a + b }
 
-inline fun Array<Int>.sum() = fold(0) { (a, b: Int) -> a + b }
-inline fun Array<Float>.sum() = fold(0.toFloat()) { (a, b: Float) -> a + b }
-inline fun Array<Double>.sum() = fold(0.toDouble()) { (a, b: Double) -> a + b }
-inline fun Array<Long>.sum() = fold(0.toLong()) { (a, b: Long) -> a + b }
-inline fun Array<BigInteger>.sum() = fold(bigInt(0)) { (a, b: BigInteger) -> a + b }
+inline fun Iterator<Int>.sum() = fold(0) { (a, b) -> a + b }
+inline fun Iterator<Float>.sum() = fold(0.toFloat()) { (a, b) -> a + b }
+inline fun Iterator<Double>.sum() = fold(0.toDouble()) { (a, b) -> a + b }
+inline fun Iterator<Long>.sum() = fold(0.toLong()) { (a, b) -> a + b }
+inline fun Iterator<BigInteger>.sum() = fold(bigInt(0)) { (a, b) -> a + b }
 
 // product
-inline fun java.lang.Iterable<Int>.product() = fold(1) { (a, b) -> a * b }
-inline fun java.lang.Iterable<Float>.product() = fold(1.toFloat()) { (a, b) -> a * b }
-inline fun java.lang.Iterable<Double>.product() = fold(1.toDouble()) { (a, b) -> a * b }
-inline fun java.lang.Iterable<Long>.product() = fold(1.toLong()) { (a, b) -> a * b }
-inline fun java.lang.Iterable<BigInteger>.product() = fold(bigInt(1)) { (a, b) -> a * b }
-
-inline fun java.util.Iterator<Int>.product() = fold(1) { (a, b) -> a * b }
-inline fun java.util.Iterator<Float>.product() = fold(1.toFloat()) { (a, b) -> a * b }
-inline fun java.util.Iterator<Double>.product() = fold(1.toDouble()) { (a, b) -> a * b }
-inline fun java.util.Iterator<Long>.product() = fold(1.toLong()) { (a, b) -> a * b }
-inline fun java.util.Iterator<BigInteger>.product() = fold(bigInt(1)) { (a, b) -> a * b }
+inline fun Array<Int>.product() = fold(1) { (a, b: Int) -> a * b }
+inline fun Array<Float>.product() = fold(1.toFloat()) { (a, b: Float) -> a * b }
+inline fun Array<Double>.product() = fold(1.toDouble()) { (a, b: Double) -> a * b }
+inline fun Array<Long>.product() = fold(1.toLong()) { (a, b: Long) -> a * b }
+inline fun Array<BigInteger>.product() = fold(bigInt(1)) { (a, b: BigInteger) -> a * b }
 
 inline fun Iterable<Int>.product() = fold(1) { (a, b: Int) -> a * b }
 inline fun Iterable<Float>.product() = fold(1.toFloat()) { (a, b: Float) -> a * b }
@@ -95,22 +83,17 @@ inline fun Iterable<Double>.product() = fold(1.toDouble()) { (a, b: Double) -> a
 inline fun Iterable<Long>.product() = fold(1.toLong()) { (a, b: Long) -> a * b }
 inline fun Iterable<BigInteger>.product() = fold(bigInt(1)) { (a, b: BigInteger) -> a * b }
 
-inline fun Array<Int>.product() = fold(1) { (a, b: Int) -> a * b }
-inline fun Array<Float>.product() = fold(1.toFloat()) { (a, b: Float) -> a * b }
-inline fun Array<Double>.product() = fold(1.toDouble()) { (a, b: Double) -> a * b }
-inline fun Array<Long>.product() = fold(1.toLong()) { (a, b: Long) -> a * b }
-inline fun Array<BigInteger>.product() = fold(bigInt(1)) { (a, b: BigInteger) -> a * b }
+inline fun Iterator<Int>.product() = fold(1) { (a, b) -> a * b }
+inline fun Iterator<Float>.product() = fold(1.toFloat()) { (a, b) -> a * b }
+inline fun Iterator<Double>.product() = fold(1.toDouble()) { (a, b) -> a * b }
+inline fun Iterator<Long>.product() = fold(1.toLong()) { (a, b) -> a * b }
+inline fun Iterator<BigInteger>.product() = fold(bigInt(1)) { (a, b) -> a * b }
 
 // max
-inline fun java.lang.Iterable<Int>.max() = fold(0) { (a, b) -> Math.max(a, b) }
-inline fun java.lang.Iterable<Float>.max() = fold(0.toFloat()) { (a, b) -> Math.max(a, b) }
-inline fun java.lang.Iterable<Double>.max() = fold(0.toDouble()) { (a, b) -> Math.max(a, b) }
-inline fun java.lang.Iterable<Long>.max() = fold(0.toLong()) { (a, b) -> Math.max(a, b) }
-
-inline fun java.util.Iterator<Int>.max() = fold(0) { (a, b) -> Math.max(a, b) }
-inline fun java.util.Iterator<Float>.max() = fold(0.toFloat()) { (a, b) -> Math.max(a, b) }
-inline fun java.util.Iterator<Double>.max() = fold(0.toDouble()) { (a, b) -> Math.max(a, b) }
-inline fun java.util.Iterator<Long>.max() = fold(0.toLong()) { (a, b) -> Math.max(a, b) }
+inline fun Iterator<Int>.max() = fold(0) { (a, b) -> Math.max(a, b) }
+inline fun Iterator<Float>.max() = fold(0.toFloat()) { (a, b) -> Math.max(a, b) }
+inline fun Iterator<Double>.max() = fold(0.toDouble()) { (a, b) -> Math.max(a, b) }
+inline fun Iterator<Long>.max() = fold(0.toLong()) { (a, b) -> Math.max(a, b) }
 
 inline fun Iterable<Int>.max() = fold(0) { (a, b: Int) -> Math.max(a, b) }
 inline fun Iterable<Float>.max() = fold(0.toFloat()) { (a, b: Float) -> Math.max(a, b) }
@@ -132,20 +115,18 @@ fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): Triplet<T
   return null
 }
 
-fun <A : Any, B : Any, C : Any> zipWith(f: (A, B) -> C,
-                                        iterable1: java.lang.Iterable<A>,
-                                        iterable2: java.lang.Iterable<B>): List<C> {
+fun <A : Any, B : Any, C : Any> zipWith(f: (A, B) -> C, iterable1: Iterable<A>, iterable2: Iterable<B>): List<C> {
   return zipWith(f, iterable1.iterator(), iterable2.iterator()).toList()
 }
 
 fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
-                                                  iterable1: java.lang.Iterable<A>,
-                                                  iterable2: java.lang.Iterable<B>,
-                                                  iterable3: java.lang.Iterable<C>): List<D> {
+                                                  iterable1: Iterable<A>,
+                                                  iterable2: Iterable<B>,
+                                                  iterable3: Iterable<C>): List<D> {
   return zipWith3(f, iterable1.iterator(), iterable2.iterator(), iterable3.iterator()).toList()
 }
 
-fun <T : Any> java.lang.Iterable<T>.foldRight1(operation : (T, T) -> T): T {
+fun <T : Any> Iterable<T>.foldRight1(operation : (T, T) -> T): T {
   val copy = toLinkedList()
   val seed = copy.removeLast()
   return copy.foldRight(seed, operation)
@@ -154,7 +135,7 @@ fun <T : Any> java.lang.Iterable<T>.foldRight1(operation : (T, T) -> T): T {
 /**
  * Returns a list starting with the *initial* value followed by the intermediary result of reducing sequential pairs of elements from left to right
  */
-fun <T : Any> java.lang.Iterable<T>.scanLeft(initial: T, operation: (T, T) -> T): List<T> {
+fun <T : Any> Iterable<T>.scanLeft(initial: T, operation: (T, T) -> T): List<T> {
   val result = arrayList<T>(initial)
   forEach { result.add(operation(result.last(), it)) }
   return result
