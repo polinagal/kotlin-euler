@@ -4,7 +4,6 @@ import java.io.File
 import java.math.BigInteger
 import java.util.ArrayList
 import java.util.LinkedList
-import java.util.List
 
 import euler.iterators.zipWith
 import euler.iterators.zipWith3
@@ -107,11 +106,8 @@ inline fun Array<Long>.max() = fold(0.toLong()) { (a, b: Long) -> Math.max(a, b)
 
 // cartesian products
 
-class Pair<T: Any>(val first: T, val second: T)
-class Triplet<T: Any>(val first: T, val second: T, val third: T)
-
-fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): Triplet<T>? {
-  for (a in this) for (b in this) for (c in this) if ((predicate)(a, b, c)) return Triplet(a, b, c)
+fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): Triple<T, T, T>? {
+  for (a in this) for (b in this) for (c in this) if ((predicate)(a, b, c)) return Triple(a, b, c)
   return null
 }
 

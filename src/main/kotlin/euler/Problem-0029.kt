@@ -2,7 +2,6 @@ package euler.problem0029
 
 import euler.bigInt
 import java.math.BigInteger
-import java.util.Iterator
 
 fun main(args: Array<String>) {
   val min = 2; val max = 100; val range = min..max

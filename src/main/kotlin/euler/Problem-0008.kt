@@ -34,6 +34,6 @@ fun main(args : Array<String>) {
   print("the largest product of $size consecutive digits ${result.sequence.toDigits()} is ${result.product} in:\n$digits")
 }
 
-class Product(val sequence: String, val product: Int)
+data class Product(val sequence: String, val product: Int)
 
 inline fun Iterator<Product>.max() = fold(Product("", 0)) { (a, b) -> if (a.product > b.product) a else b }

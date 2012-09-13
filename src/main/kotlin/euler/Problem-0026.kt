@@ -18,6 +18,6 @@ fun main(args : Array<String>) {
   println("the value of d < $limit for which 1/d contains the longest recurring cycle in its decimal fraction part is ${result.denominator} which has a period of ${result.period}")
 }
 
-class Fraction(val denominator: Long, val period: Int)
+data class Fraction(val denominator: Long, val period: Int)
 
 inline fun Iterator<Fraction>.max() = fold(Fraction(0.toLong(), 0)) { (a, b) -> if (a.period > b.period) a else b }

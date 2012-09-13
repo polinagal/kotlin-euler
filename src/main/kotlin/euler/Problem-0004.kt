@@ -2,7 +2,6 @@ package euler.problem0004
 
 import euler.isPalindrome
 import euler.iterators.times
-import euler.Triplet
 
 fun main(args : Array<String>) {
   // average execution time of 245.5814 milliseconds over 10 iterations
@@ -13,6 +12,6 @@ fun main(args : Array<String>) {
   println("the largest palindrome made from the product of two 3-digit numbers is $multiplier x $multiplicand = $product")
 }
 
-inline fun IntRange.palindromes() = (this * this).map { Triplet(it.first, it.second, it.first * it.second) }.filter { it.third.isPalindrome() }
+inline fun IntRange.palindromes() = (this * this).map { Triple(it.first, it.second, it.first * it.second) }.filter { it.third.isPalindrome() }
 
-inline fun Iterator<Triplet<Int>>.max() = fold(Triplet(0, 0, 0)) { (a, b) -> if (Math.max(a.third, b.third) == a.third) a else b }
+inline fun Iterator<Triple<Int, Int, Int>>.max() = fold(Triple(0, 0, 0)) { (a, b) -> if (Math.max(a.third, b.third) == a.third) a else b }

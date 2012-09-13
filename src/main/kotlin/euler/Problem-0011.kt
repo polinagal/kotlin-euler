@@ -3,7 +3,6 @@ package euler.problem0011
 import euler.max
 import java.io.File
 import java.util.ArrayList
-import java.util.List
 
 fun main(args: Array<String>) {
   val matrix = Matrix(20)

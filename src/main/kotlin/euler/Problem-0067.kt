@@ -3,7 +3,6 @@ package euler.problem0067
 import java.io.File
 import java.lang.Math.max
 import java.util.ArrayList
-import java.util.List
 
 import euler.foldRight1
 import euler.loadRowsFrom

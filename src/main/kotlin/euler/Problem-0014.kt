@@ -3,9 +3,6 @@ package euler.problem0014
 import euler.multipleOf
 import euler.plus
 
-import java.util.Collection
-import java.util.List
-
 fun main(args : Array<String>) {
   val limit = 1000000
 
@@ -19,7 +16,7 @@ inline fun lengthOfSequence(n: Long, length: Int = 0): Int {
   return if (n == 1.toLong()) length + 1 else lengthOfSequence(if (n multipleOf 2) (n / 2) else (3 * n + 1), length + 1)
 }
 
-class Chain(val start: Int, val length: Int) {
+data class Chain(val start: Int, val length: Int) {
   fun build() = sequence(start.toLong())
 
   private fun sequence(n: Long): List<Long> {

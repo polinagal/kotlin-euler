@@ -5,6 +5,8 @@ import euler.rotations
 import euler.toCharList
 import euler.iterators.primes
 
+import java.lang.Long.parseLong
+
 fun main(args : Array<String>) {
   val limit = 1000000
 
@@ -14,4 +16,4 @@ fun main(args : Array<String>) {
   println("the ${result.size()} circular primes below $limit are $result")
 }
 
-inline fun Long.isCircularPrime() = toCharList().rotations().all { Long.parseLong(it.makeString("")).isPrime() }
+inline fun Long.isCircularPrime() = toCharList().rotations().all { parseLong(it.makeString("")).isPrime() }

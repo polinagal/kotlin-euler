@@ -3,12 +3,10 @@ package euler.iterators
 import euler.bigInt
 import euler.isPrime
 import euler.minus
-import euler.Pair
 import euler.plus
 
 import java.io.File
 import java.math.BigInteger
-import java.util.List
 import java.util.Scanner
 
 import kotlin.math.plus
@@ -31,10 +29,10 @@ fun primes(): Iterator<Long> {
   return iterate { nextPrime() }
 }
 
-class FibonacciTerm(val index: Int, val value: BigInteger)
+data class FibonacciTerm(val index: Int, val value: BigInteger)
 
 fun fibonacci(): Iterator<BigInteger> {
-  val iterator = fibonacciWithIndices().iterator()
+  val iterator = fibonacciWithIndices()
   return iterate { iterator.next().value }
 }
 
@@ -49,10 +47,10 @@ fun fibonacciWithIndices(): Iterator<FibonacciTerm> {
   return iterate { nextFibonacci() }
 }
 
-fun triangles(): Iterator<Pair<Int>> {
+fun triangles(): Iterator<Pair<Int, Int>> {
   var n = 0; var sum = 0
 
-  fun nextTriangle(): Pair<Int> {
+  fun nextTriangle(): Pair<Int, Int> {
     sum += ++n
     return Pair(n, sum)
   }
@@ -64,10 +62,10 @@ fun triangles(): Iterator<Pair<Int>> {
  * Produces the [cartesian product](http://en.wikipedia.org/wiki/Cartesian_product#n-ary_product) as a sequence of ordered pairs of elements lazily obtained
  * from two [[Iterable]] instances
  */
-fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<Pair<T>> {
+fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<Pair<T, T>> {
   val first = iterator(); var second = other.iterator(); var a: T? = null
 
-  fun nextPair(): Pair<T>? {
+  fun nextPair(): Pair<T, T>? {
     if (a == null && first.hasNext()) a = first.next()
     if (second.hasNext()) return Pair(a!!, second.next())
     if (first.hasNext()) {
