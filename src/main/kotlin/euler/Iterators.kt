@@ -113,7 +113,7 @@ fun String.sliding(size: Int): Iterator<String> {
       1..size forEach { if (iterator.hasNext()) window.append(iterator.next()) }
       return window.toString()
     }
-    return if (iterator.hasNext()) window.deleteCharAt(0)?.append(iterator.next()).toString() else null
+    return if (iterator.hasNext()) window.deleteCharAt(0).append(iterator.next()).toString() else null
   }
 
   return iterate { nextWindow() }
@@ -128,8 +128,7 @@ fun <T : Any> List<T>.permutations() : Iterator<List<T>> = if (size == 1) Single
     if (iterator.hasNext()) {
       head = iterator.next()
       permutations = (this - head).permutations()
-//      nextPermutation() // TODO: raise compiler bug - VerifyError: Accessing value from uninitialized register 4
-      head + permutations.next()
+      nextPermutation()
     } else null
   }
 
