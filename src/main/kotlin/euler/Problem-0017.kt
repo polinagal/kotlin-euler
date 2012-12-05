@@ -26,13 +26,13 @@ fun writeOut(number : Int) : String = when (number) {
   13 -> "thirteen"
   15 -> "fifteen"
   18 -> "eighteen"
-  in arrayList(14, 16, 17, 19) -> writeOut(number % 10) + "teen"
+  in listOf(14, 16, 17, 19) -> writeOut(number % 10) + "teen"
   20 -> "twenty"
   30 -> "thirty"
   40 -> "forty"
   50 -> "fifty"
   80 -> "eighty"
-  in arrayList(60, 70, 90) -> writeOut(number / 10) + "ty"
+  in listOf(60, 70, 90) -> writeOut(number / 10) + "ty"
   in 21..99 -> writeOut(number / 10 * 10) + "-" + writeOut(number % 10)
   in 100..999 -> writeOut(number / 100) + " hundred" + if (number % 100 == 0) "" else " and " + writeOut(number % 100)
   1000 -> "one thousand"

@@ -42,7 +42,7 @@ inline fun Long.numberOfDivisors(): Int {
 
 inline fun primeFactors(n: Long): List<Long> {
   val primeFactor = n.smallestPrimeFactor()
-  return if (primeFactor == null) arrayList(n) else primeFactor + primeFactors(n / primeFactor)
+  return if (primeFactor == null) listOf(n) else primeFactor + primeFactors(n / primeFactor)
 }
 
 inline fun Int.smallestPrimeFactor() = toLong().smallestPrimeFactor()?.toInt()

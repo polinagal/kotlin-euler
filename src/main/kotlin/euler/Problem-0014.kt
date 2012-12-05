@@ -20,7 +20,7 @@ data class Chain(val start: Int, val length: Int) {
   fun build() = sequence(start.toLong())
 
   private fun sequence(n: Long): List<Long> {
-    if (n == 1.toLong()) return arrayList(n)
+    if (n == 1.toLong()) return listOf(n)
     return if (n multipleOf 2) n + sequence(n / 2) else n + sequence(3 * n + 1)
   }
 }
