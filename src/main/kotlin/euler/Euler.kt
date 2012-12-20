@@ -132,7 +132,7 @@ fun <T : Any> Iterable<T>.foldRight1(operation : (T, T) -> T): T {
  * Returns a list starting with the *initial* value followed by the intermediary result of reducing sequential pairs of elements from left to right
  */
 fun <T : Any> Iterable<T>.scanLeft(initial: T, operation: (T, T) -> T): List<T> {
-  val result = arrayList<T>(initial)
+  val result = arrayListOf<T>(initial)
   forEach { result.add(operation(result.last(), it)) }
   return result
 }
@@ -140,7 +140,7 @@ fun <T : Any> Iterable<T>.scanLeft(initial: T, operation: (T, T) -> T): List<T> 
 // candidates for kotlin.util
 
 inline fun <T: Any> List<T>.rotations(): List<List<T>> {
-  val result = arrayList<List<T>>(this)
+  val result = arrayListOf<List<T>>(this)
   val linkedList = LinkedList(this)
   2..size() forEach {
     linkedList.addLast(linkedList.removeFirst())
