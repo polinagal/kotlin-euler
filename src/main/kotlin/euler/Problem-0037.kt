@@ -22,12 +22,13 @@ inline fun String.truncateLeft() = truncate(this) { it.substring(1) }
 inline fun String.truncateRight() = truncate(this) { it.substring(0, it.length() - 1) }
 inline fun Iterator<String>.allPrimes() = all { parseLong(it).isPrime() }
 
-inline fun truncate(var string: String, reduce: (String) -> String): Iterator<String> {
+inline fun truncate(string: String, reduce: (String) -> String): Iterator<String> {
   var current: String?
 
   fun nextString(): String? {
     current = string
-    when (string.length()) { 0 -> current = null; 1 -> string = ""; else -> string = (reduce)(string) }
+    var tmp = string
+    when (tmp.length()) { 0 -> current = null; 1 -> tmp = ""; else -> tmp = (reduce)(tmp) }
     return current
   }
 

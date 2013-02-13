@@ -7,7 +7,7 @@ fun main(args : Array<String>) {
   val limit = 1000000
 
   // average execution time of 590.8156 milliseconds over 10 iterations
-  val chain = (1..limit).map { Chain(it, lengthOfSequence(it.toLong())) }.max()
+  val chain = (1..limit).toList().map { Chain(it, lengthOfSequence(it.toLong())) }.max()
 
   println("the longest chain below $limit starts with ${chain.start} and has ${chain.length} elements:\n${chain.build()}")
 }
