@@ -10,6 +10,7 @@ import java.math.BigInteger
 import java.util.Scanner
 
 import kotlin.math.plus
+import kotlin.support.SingleIterator
 
 fun range(start: Int, increment: Int = 1): Iterator<Int> {
   var current = start
