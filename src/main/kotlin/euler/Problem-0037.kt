@@ -23,14 +23,10 @@ inline fun String.truncateRight() = truncate(this) { it.substring(0, it.length()
 inline fun Iterator<String>.allPrimes() = all { parseLong(it).isPrime() }
 
 inline fun truncate(string: String, reduce: (String) -> String): Iterator<String> {
-  var current: String?
-
-  fun nextString(): String? {
-    current = string
-    var tmp = string
-    when (tmp.length()) { 0 -> current = null; 1 -> tmp = ""; else -> tmp = (reduce)(tmp) }
-    return current
+  return iterate {
+      var current: String? = string
+      var tmp = string
+      when (tmp.length()) { 0 -> current = null; 1 -> tmp = ""; else -> tmp = (reduce)(tmp) }
+      current
   }
-
-  return iterate { nextString() }
 }

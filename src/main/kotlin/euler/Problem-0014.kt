@@ -12,7 +12,7 @@ fun main(args : Array<String>) {
   println("the longest chain below $limit starts with ${chain.start} and has ${chain.length} elements:\n${chain.build()}")
 }
 
-inline fun lengthOfSequence(n: Long, length: Int = 0): Int {
+fun lengthOfSequence(n: Long, length: Int = 0): Int {
   return if (n == 1.toLong()) length + 1 else lengthOfSequence(if (n multipleOf 2) (n / 2) else (3 * n + 1), length + 1)
 }
 

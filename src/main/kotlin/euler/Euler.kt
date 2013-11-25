@@ -25,7 +25,7 @@ inline fun String.fold(seed: Int, operation: (Int, Int) -> Int): Int {
 // candidates for kotlin.math
 inline fun <T: Number> bigInt(n: T) = BigInteger(n.toString())
 
-inline fun factorial(n: Int, product: BigInteger = bigInt(1)): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
+fun factorial(n: Int, product: BigInteger = bigInt(1)): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
 inline fun Int.times(multiplicand: BigInteger) = bigInt(this) * multiplicand
 
 inline fun Int.multipleOf(n: Int) = toLong() multipleOf n
