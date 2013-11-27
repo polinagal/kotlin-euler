@@ -57,10 +57,6 @@ inline fun Array<Double>.sum() = fold(0.toDouble()) { (a, b: Double) -> a + b }
 inline fun Array<Long>.sum() = fold(0.toLong()) { (a, b: Long) -> a + b }
 inline fun Array<BigInteger>.sum() = fold(bigInt(0)) { (a, b: BigInteger) -> a + b }
 
-inline fun Iterable<Int>.sum() = fold(0) { (a, b: Int) -> a + b }
-inline fun Iterable<Float>.sum() = fold(0.toFloat()) { (a, b: Float) -> a + b }
-inline fun Iterable<Double>.sum() = fold(0.toDouble()) { (a, b: Double) -> a + b }
-inline fun Iterable<Long>.sum() = fold(0.toLong()) { (a, b: Long) -> a + b }
 inline fun Iterable<BigInteger>.sum() = fold(bigInt(0)) { (a, b: BigInteger) -> a + b }
 
 inline fun Iterator<Int>.sum() = fold(0) { (a, b) -> a + b }
