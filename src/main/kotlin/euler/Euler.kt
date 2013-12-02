@@ -40,7 +40,7 @@ inline fun Long.numberOfDivisors(): Int {
   return primeFactors(this).groupBy { it }.values().map { (group: List<Long>) -> group.size() + 1 }.product()
 }
 
-inline fun primeFactors(n: Long): List<Long> {
+fun primeFactors(n: Long): List<Long> {
   val primeFactor = n.smallestPrimeFactor()
   return if (primeFactor == null) listOf(n) else primeFactor + primeFactors(n / primeFactor)
 }
