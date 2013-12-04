@@ -9,7 +9,7 @@ fun main(args : Array<String>) {
   // see http://en.wikipedia.org/wiki/Repeating_decimal#Fractions_with_prime_denominators
   fun periodOfRepeatingDecimalInTheInverseOf(denominator: Long): Fraction {
     val period = 1..limit find { bigInt(10).modPow(bigInt(it), bigInt(denominator)) == bigInt(1) }
-    Fraction(denominator, period ?: 1)
+    return Fraction(denominator, period ?: 1)
   }
 
   // average execution time of 47.3446 milliseconds over 10 iterations

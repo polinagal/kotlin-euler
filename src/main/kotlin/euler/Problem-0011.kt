@@ -65,7 +65,7 @@ class Matrix(val size: Int) {
         cols = (0..numbers.size - 1).iterator()
         return traverser(row, cols.next(), operation)
       }
-      else null
+      return null
     }
 
     return iterate { next() }.max()
