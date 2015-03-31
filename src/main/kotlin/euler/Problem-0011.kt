@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
   }
 
   // average execution time of 1.649 milliseconds over 10 iterations
-  println("the greatest product of four adjacent numbers in any direction is ${matrix.max { (a, b, c, d) -> a * b * c * d }}")
+  println("the greatest product of four adjacent numbers in any direction is ${matrix.max { a, b, c, d -> a * b * c * d }}")
 }
 
 class Matrix(val size: Int) {
@@ -31,22 +31,22 @@ class Matrix(val size: Int) {
     ).max()
   }
 
-  private val horizontally = { (i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int) ->
+  private val horizontally = { i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int ->
     if (i > size || j + 4 > size) 0
     else operation(numbers[i][j], numbers[i][j + 1], numbers[i][j + 2], numbers[i][j + 3])
   }
 
-  private val vertically = { (i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int) ->
+  private val vertically = { i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int ->
     if (i + 4 > size || j > size) 0
     else operation(numbers[i][j], numbers[i + 1][j], numbers[i + 2][j], numbers[i + 3][j])
   }
 
-  private val diagonallyRight = { (i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int) ->
+  private val diagonallyRight = { i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int ->
     if (i + 4 > size || j + 4 > size) 0
     else operation(numbers[i][j], numbers[i + 1][j + 1], numbers[i + 2][j + 2], numbers[i + 3][j + 3])
   }
 
-  private val diagonallyLeft = { (i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int) ->
+  private val diagonallyLeft = { i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int ->
     if (i - 3 < 0 || j + 4 > size) 0
     else operation(numbers[i][j], numbers[i - 1][j + 1], numbers[i - 2][j + 2], numbers[i - 3][j + 3])
   }

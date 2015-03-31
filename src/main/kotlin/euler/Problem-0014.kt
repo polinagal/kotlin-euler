@@ -25,4 +25,4 @@ data class Chain(val start: Int, val length: Int) {
   }
 }
 
-inline fun List<Chain>.max() = fold(Chain(0, 0)) { (a, b) -> if (a.length > b.length) a else b }
+inline fun List<Chain>.max() = fold(Chain(0, 0)) { a, b -> if (a.length > b.length) a else b }

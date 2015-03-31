@@ -9,7 +9,7 @@ fun main(args : Array<String>) {
 
   // average execution time of 18.9878 milliseconds over 10 iterations
   val range = (1..limit).iterator() map { bigInt(it) }
-  val series = range.fold(bigInt(0)) { (a, b) -> a + b.pow(b.intValue()) }
+  val series = range.fold(bigInt(0)) { a, b -> a + b.pow(b.intValue()) }
   val digits = series.toString()
 
   val result = digits.substring(digits.length() - 10)
