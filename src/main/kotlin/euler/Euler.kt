@@ -13,7 +13,7 @@ import kotlin.math.times
 
 // candidates for kotlin
 inline fun Any.toCharList() = toString().iterator().toArrayList()
-inline fun Any.toDigits() = toCharList().map { (c: Char) -> Character.getNumericValue(c) }
+inline fun Any.toDigits() = toCharList().map { c: Char -> Character.getNumericValue(c) }
 inline fun Any.isPalindrome() = toCharList() == toCharList().reverse()
 
 inline fun String.fold(seed: Int, operation: (Int, Int) -> Int): Int {
@@ -37,7 +37,7 @@ inline fun Long.isPrime() = this > 1 && smallestPrimeFactor() == null
 
 inline fun Int.numberOfDivisors(): Int = toLong().numberOfDivisors()
 inline fun Long.numberOfDivisors(): Int {
-  return primeFactors(this).groupBy { it }.values().map { (group: List<Long>) -> group.size() + 1 }.product()
+  return primeFactors(this).groupBy { it }.values().map { group: List<Long> -> group.size() + 1 }.product()
 }
 
 fun primeFactors(n: Long): List<Long> {
@@ -51,54 +51,54 @@ inline fun Long.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toLong() find {
 // candidates for JavaIterables.kt
 
 // sum
-inline fun Array<Int>.sum() = fold(0) { (a, b: Int) -> a + b }
-inline fun Array<Float>.sum() = fold(0.toFloat()) { (a, b: Float) -> a + b }
-inline fun Array<Double>.sum() = fold(0.toDouble()) { (a, b: Double) -> a + b }
-inline fun Array<Long>.sum() = fold(0.toLong()) { (a, b: Long) -> a + b }
-inline fun Array<BigInteger>.sum() = fold(bigInt(0)) { (a, b: BigInteger) -> a + b }
+inline fun Array<Int>.sum() = fold(0) { a, b: Int -> a + b }
+inline fun Array<Float>.sum() = fold(0.toFloat()) { a, b: Float -> a + b }
+inline fun Array<Double>.sum() = fold(0.toDouble()) { a, b: Double -> a + b }
+inline fun Array<Long>.sum() = fold(0.toLong()) { a, b: Long -> a + b }
+inline fun Array<BigInteger>.sum() = fold(bigInt(0)) { a, b: BigInteger -> a + b }
 
-inline fun Iterable<BigInteger>.sum() = fold(bigInt(0)) { (a, b: BigInteger) -> a + b }
+inline fun Iterable<BigInteger>.sum() = fold(bigInt(0)) { a, b: BigInteger -> a + b }
 
-inline fun Iterator<Int>.sum() = fold(0) { (a, b) -> a + b }
-inline fun Iterator<Float>.sum() = fold(0.toFloat()) { (a, b) -> a + b }
-inline fun Iterator<Double>.sum() = fold(0.toDouble()) { (a, b) -> a + b }
-inline fun Iterator<Long>.sum() = fold(0.toLong()) { (a, b) -> a + b }
-inline fun Iterator<BigInteger>.sum() = fold(bigInt(0)) { (a, b) -> a + b }
+inline fun Iterator<Int>.sum() = fold(0) { a, b -> a + b }
+inline fun Iterator<Float>.sum() = fold(0.toFloat()) { a, b -> a + b }
+inline fun Iterator<Double>.sum() = fold(0.toDouble()) { a, b -> a + b }
+inline fun Iterator<Long>.sum() = fold(0.toLong()) { a, b -> a + b }
+inline fun Iterator<BigInteger>.sum() = fold(bigInt(0)) { a, b -> a + b }
 
 // product
-inline fun Array<Int>.product() = fold(1) { (a, b: Int) -> a * b }
-inline fun Array<Float>.product() = fold(1.toFloat()) { (a, b: Float) -> a * b }
-inline fun Array<Double>.product() = fold(1.toDouble()) { (a, b: Double) -> a * b }
-inline fun Array<Long>.product() = fold(1.toLong()) { (a, b: Long) -> a * b }
-inline fun Array<BigInteger>.product() = fold(bigInt(1)) { (a, b: BigInteger) -> a * b }
+inline fun Array<Int>.product() = fold(1) { a, b: Int -> a * b }
+inline fun Array<Float>.product() = fold(1.toFloat()) { a, b: Float -> a * b }
+inline fun Array<Double>.product() = fold(1.toDouble()) { a, b: Double -> a * b }
+inline fun Array<Long>.product() = fold(1.toLong()) { a, b: Long -> a * b }
+inline fun Array<BigInteger>.product() = fold(bigInt(1)) { a, b: BigInteger -> a * b }
 
-inline fun Iterable<Int>.product() = fold(1) { (a, b: Int) -> a * b }
-inline fun Iterable<Float>.product() = fold(1.toFloat()) { (a, b: Float) -> a * b }
-inline fun Iterable<Double>.product() = fold(1.toDouble()) { (a, b: Double) -> a * b }
-inline fun Iterable<Long>.product() = fold(1.toLong()) { (a, b: Long) -> a * b }
-inline fun Iterable<BigInteger>.product() = fold(bigInt(1)) { (a, b: BigInteger) -> a * b }
+inline fun Iterable<Int>.product() = fold(1) { a, b: Int -> a * b }
+inline fun Iterable<Float>.product() = fold(1.toFloat()) { a, b: Float -> a * b }
+inline fun Iterable<Double>.product() = fold(1.toDouble()) { a, b: Double -> a * b }
+inline fun Iterable<Long>.product() = fold(1.toLong()) { a, b: Long -> a * b }
+inline fun Iterable<BigInteger>.product() = fold(bigInt(1)) { a, b: BigInteger -> a * b }
 
-inline fun Iterator<Int>.product() = fold(1) { (a, b) -> a * b }
-inline fun Iterator<Float>.product() = fold(1.toFloat()) { (a, b) -> a * b }
-inline fun Iterator<Double>.product() = fold(1.toDouble()) { (a, b) -> a * b }
-inline fun Iterator<Long>.product() = fold(1.toLong()) { (a, b) -> a * b }
-inline fun Iterator<BigInteger>.product() = fold(bigInt(1)) { (a, b) -> a * b }
+inline fun Iterator<Int>.product() = fold(1) { a, b -> a * b }
+inline fun Iterator<Float>.product() = fold(1.toFloat()) { a, b -> a * b }
+inline fun Iterator<Double>.product() = fold(1.toDouble()) { a, b -> a * b }
+inline fun Iterator<Long>.product() = fold(1.toLong()) { a, b -> a * b }
+inline fun Iterator<BigInteger>.product() = fold(bigInt(1)) { a, b -> a * b }
 
 // max
-inline fun Iterator<Int>.max() = fold(0) { (a, b) -> Math.max(a, b) }
-inline fun Iterator<Float>.max() = fold(0.toFloat()) { (a, b) -> Math.max(a, b) }
-inline fun Iterator<Double>.max() = fold(0.toDouble()) { (a, b) -> Math.max(a, b) }
-inline fun Iterator<Long>.max() = fold(0.toLong()) { (a, b) -> Math.max(a, b) }
+inline fun Iterator<Int>.max() = fold(0) { a, b -> Math.max(a, b) }
+inline fun Iterator<Float>.max() = fold(0.toFloat()) { a, b -> Math.max(a, b) }
+inline fun Iterator<Double>.max() = fold(0.toDouble()) { a, b -> Math.max(a, b) }
+inline fun Iterator<Long>.max() = fold(0.toLong()) { a, b -> Math.max(a, b) }
 
-inline fun Iterable<Int>.max() = fold(0) { (a, b: Int) -> Math.max(a, b) }
-inline fun Iterable<Float>.max() = fold(0.toFloat()) { (a, b: Float) -> Math.max(a, b) }
-inline fun Iterable<Double>.max() = fold(0.toDouble()) { (a, b: Double) -> Math.max(a, b) }
-inline fun Iterable<Long>.max() = fold(0.toLong()) { (a, b: Long) -> Math.max(a, b) }
+inline fun Iterable<Int>.max() = fold(0) { a, b: Int -> Math.max(a, b) }
+inline fun Iterable<Float>.max() = fold(0.toFloat()) { a, b: Float -> Math.max(a, b) }
+inline fun Iterable<Double>.max() = fold(0.toDouble()) { a, b: Double -> Math.max(a, b) }
+inline fun Iterable<Long>.max() = fold(0.toLong()) { a, b: Long -> Math.max(a, b) }
 
-inline fun Array<Int>.max() = fold(0) { (a, b: Int) -> Math.max(a, b) }
-inline fun Array<Float>.max() = fold(0.toFloat()) { (a, b: Float) -> Math.max(a, b) }
-inline fun Array<Double>.max() = fold(0.toDouble()) { (a, b: Double) -> Math.max(a, b) }
-inline fun Array<Long>.max() = fold(0.toLong()) { (a, b: Long) -> Math.max(a, b) }
+inline fun Array<Int>.max() = fold(0) { a, b: Int -> Math.max(a, b) }
+inline fun Array<Float>.max() = fold(0.toFloat()) { a, b: Float -> Math.max(a, b) }
+inline fun Array<Double>.max() = fold(0.toDouble()) { a, b: Double -> Math.max(a, b) }
+inline fun Array<Long>.max() = fold(0.toLong()) { a, b: Long -> Math.max(a, b) }
 
 // cartesian products
 

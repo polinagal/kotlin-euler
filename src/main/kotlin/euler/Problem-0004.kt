@@ -14,4 +14,4 @@ fun main(args : Array<String>) {
 
 inline fun IntRange.palindromes() = (this * this).map { Triple(it.first, it.second, it.first * it.second) }.filter { it.third.isPalindrome() }
 
-inline fun Iterator<Triple<Int, Int, Int>>.max() = fold(Triple(0, 0, 0)) { (a, b) -> if (Math.max(a.third, b.third) == a.third) a else b }
+inline fun Iterator<Triple<Int, Int, Int>>.max() = fold(Triple(0, 0, 0)) { a, b -> if (Math.max(a.third, b.third) == a.third) a else b }

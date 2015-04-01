@@ -29,11 +29,11 @@ fun main(args : Array<String>) {
 71636269561882670428252483600823257530420752963450
 """
   // average execution time of 2.6081 milliseconds over 10 iterations
-  val result = digits.sliding(size).map { (window: String) -> Product(window, window.toDigits().product()) }.max()
+  val result = digits.sliding(size).map { window: String -> Product(window, window.toDigits().product()) }.max()
 
   print("the largest product of $size consecutive digits ${result.sequence.toDigits()} is ${result.product} in:\n$digits")
 }
 
 data class Product(val sequence: String, val product: Int)
 
-inline fun Iterator<Product>.max() = fold(Product("", 0)) { (a, b) -> if (a.product > b.product) a else b }
+inline fun Iterator<Product>.max() = fold(Product("", 0)) { a, b -> if (a.product > b.product) a else b }
