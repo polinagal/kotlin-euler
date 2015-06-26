@@ -1,9 +1,6 @@
 package euler.iterators
 
-import euler.bigInt
-import euler.isPrime
-import euler.minus
-import euler.plus
+import euler.*
 
 import java.io.File
 import java.math.BigInteger
@@ -11,31 +8,19 @@ import java.util.Scanner
 
 import kotlin.math.plus
 
-fun range(start: Int, increment: Int = 1): Iterator<Int> {
-  var current = start
-  return iterate { val next = current; current += increment; next }
-}
+fun range(start: Int, increment: Int = 1): Sequence<Int> = sequence(start) { it + increment }
 
-fun primes(): Iterator<Long> {
-  var number = 2.toLong()
-
-  fun nextPrime(): Long {
-    while (!number.isPrime()) number++
-    val result = number; number++
-    return result
-  }
-
-  return iterate { nextPrime() }
+fun primes(): Sequence<Long> = sequence(2L) { previous ->
+  var number = previous + if (previous.isEven()) 1 else 2
+  while (!number.isPrime()) number += 2
+  number
 }
 
 data class FibonacciTerm(val index: Int, val value: BigInteger)
 
-fun fibonacci(): Iterator<BigInteger> {
-  val iterator = fibonacciWithIndices()
-  return iterate { iterator.next().value }
-}
+fun fibonacci(): Sequence<BigInteger> = fibonacciWithIndices().map { it.value }
 
-fun fibonacciWithIndices(): Iterator<FibonacciTerm> {
+fun fibonacciWithIndices(): Sequence<FibonacciTerm> {
   var a = FibonacciTerm(0, bigInt(0)); var b = FibonacciTerm(1, bigInt(1))
 
   fun nextFibonacci(): FibonacciTerm {
@@ -43,10 +28,10 @@ fun fibonacciWithIndices(): Iterator<FibonacciTerm> {
     return result
   }
 
-  return iterate { nextFibonacci() }
+  return sequence { nextFibonacci() }
 }
 
-fun triangles(): Iterator<Pair<Int, Int>> {
+fun triangles(): Sequence<Pair<Int, Int>> {
   var n = 0; var sum = 0
 
   fun nextTriangle(): Pair<Int, Int> {
@@ -54,14 +39,14 @@ fun triangles(): Iterator<Pair<Int, Int>> {
     return Pair(n, sum)
   }
 
-  return iterate { nextTriangle() }
+  return sequence() { nextTriangle() }
 }
 
 /**
  * Produces the [cartesian product](http://en.wikipedia.org/wiki/Cartesian_product#n-ary_product) as a sequence of ordered pairs of elements lazily obtained
  * from two [[Iterable]] instances
  */
-fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<Pair<T, T>> {
+fun <T: Any> Iterable<T>.times(other: Iterable<T>): Sequence<Pair<T, T>> {
   val first = iterator(); var second = other.iterator(); var a: T? = null
 
   fun nextPair(): Pair<T, T>? {
@@ -74,7 +59,7 @@ fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<Pair<T, T>> {
     return null
   }
 
-  return iterate { nextPair() }
+  return sequence { nextPair() }
 }
 
 /**
@@ -82,7 +67,7 @@ fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<Pair<T, T>> {
  *
  * *size* the number of characters per group
  */
-fun String.grouped(size: Int): Iterator<String> {
+fun String.grouped(size: Int): Sequence<String> {
   val iterator = iterator()
 
   fun nextGroup(): String? {
@@ -94,7 +79,7 @@ fun String.grouped(size: Int): Iterator<String> {
     return null
   }
 
-  return iterate { nextGroup() }
+  return sequence { nextGroup() }
 }
 
 /**
@@ -103,7 +88,7 @@ fun String.grouped(size: Int): Iterator<String> {
  *
  * *size* the number of characters per group
  */
-fun String.sliding(size: Int): Iterator<String> {
+fun String.sliding(size: Int): Sequence<String> {
   val iterator = iterator()
   val window = StringBuilder()
 
@@ -115,29 +100,29 @@ fun String.sliding(size: Int): Iterator<String> {
     return if (iterator.hasNext()) window.deleteCharAt(0).append(iterator.next()).toString() else null
   }
 
-  return iterate { nextWindow() }
+  return sequence { nextWindow() }
 }
 
-fun <T : Any> List<T>.permutations() : Iterator<List<T>> = if (size == 1) SingleIterator(this) else {
+fun <T : Any> List<T>.permutations() : Sequence<List<T>> = if (size() == 1) sequenceOf(this) else {
   val iterator = iterator()
   var head = iterator.next()
-  var permutations = (this - head).permutations()
+  var permutations = (this - head).permutations().iterator()
 
   fun nextPermutation(): List<T>? = if (permutations.hasNext()) head + permutations.next() else {
     if (iterator.hasNext()) {
       head = iterator.next()
-      permutations = (this - head).permutations()
+      permutations = (this - head).permutations().iterator()
       nextPermutation()
     } else null
   }
 
-  iterate { nextPermutation() }
+  sequence { nextPermutation() }
 }
 
-fun File.scan(pattern : String = ".*", delimiter: String, encoding: String = "UTF-8"): Iterator<String> {
+fun File.scan(pattern : String = ".*", delimiter: String, encoding: String = "UTF-8"): Sequence<String> {
   val scanner = Scanner(this, encoding)
   scanner.useDelimiter(delimiter)
-  return iterate { if (scanner.hasNext(pattern)) scanner.next(pattern) else { scanner.close(); null } }
+  return sequence { if (scanner.hasNext(pattern)) scanner.next(pattern) else { scanner.close(); null } }
 }
 
 fun <T : Any> Iterator<T>.get(index: Int): T {
@@ -146,13 +131,14 @@ fun <T : Any> Iterator<T>.get(index: Int): T {
   return if (hasNext()) next() else throw IndexOutOfBoundsException("Index $index, Size: $size")
 }
 
-fun <A : Any, B : Any, C : Any> zipWith(f: (A, B) -> C, it1: Iterator<A>, it2: Iterator<B>): Iterator<C> = iterate {
-  if (it1.hasNext() && it2.hasNext()) f(it1.next(), it2.next()) else null
-}
-
 fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
-                                                  it1: Iterator<A>,
-                                                  it2: Iterator<B>,
-                                                  it3: Iterator<C>): Iterator<D> = iterate {
-  if (it1.hasNext() && it2.hasNext() && it3.hasNext()) f(it1.next(), it2.next(), it3.next()) else null
+                                                  s1: Sequence<A>,
+                                                  s2: Sequence<B>,
+                                                  s3: Sequence<C>): Sequence<D> {
+  val it1 = s1.iterator()
+  val it2 = s2.iterator()
+  val it3 = s3.iterator()
+  return sequence() {
+    if (it1.hasNext() && it2.hasNext() && it3.hasNext()) f(it1.next(), it2.next(), it3.next()) else null
+  }
 }

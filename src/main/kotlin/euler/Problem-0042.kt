@@ -10,7 +10,7 @@ fun main(args : Array<String>) {
   val triangles = setOf(*Array<Int>(100) { n -> n * (n + 1) / 2 })
   val triangleWords = words.filter { word -> triangles contains word.value() }.toList()
 
-  println("there are ${triangleWords.size()} triangle words: ${triangleWords.makeString(limit = 20)}")
+  println("there are ${triangleWords.size()} triangle words: ${triangleWords.joinToString(limit = 20)}")
 }
 
-inline fun String.value() = fold(0) { a, b -> a + (b - 'A' + 1) }
+inline fun String.value() = fold(0) { a, b -> a + (b - 'A'.toInt() + 1) }

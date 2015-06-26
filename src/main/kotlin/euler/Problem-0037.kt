@@ -20,10 +20,10 @@ inline fun Long.isLeftTruncatablePrime() = toString().truncateLeft().allPrimes()
 inline fun Long.isRightTruncatablePrime() = toString().truncateRight().allPrimes()
 inline fun String.truncateLeft() = truncate(this) { it.substring(1) }
 inline fun String.truncateRight() = truncate(this) { it.substring(0, it.length() - 1) }
-inline fun Iterator<String>.allPrimes() = all { parseLong(it).isPrime() }
+inline fun Sequence<String>.allPrimes() = all { parseLong(it).isPrime() }
 
-inline fun truncate(string: String, reduce: (String) -> String): Iterator<String> {
-  return iterate {
+inline fun truncate(string: String, reduce: (String) -> String): Sequence<String> {
+  return sequence {
       var current: String? = string
       var tmp = string
       when (tmp.length()) { 0 -> current = null; 1 -> tmp = ""; else -> tmp = (reduce)(tmp) }

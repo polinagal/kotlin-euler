@@ -16,4 +16,4 @@ fun main(args : Array<String>) {
   println("the ${result.size()} circular primes below $limit are $result")
 }
 
-inline fun Long.isCircularPrime() = toCharList().rotations().all { parseLong(it.makeString("")).isPrime() }
+inline fun Long.isCircularPrime() = toCharList().rotations().all { parseLong(it.joinToString("")).isPrime() }

@@ -1,6 +1,5 @@
 package euler.problem0003
 
-import euler.max
 import euler.primeFactors
 
 fun main(args : Array<String>) {

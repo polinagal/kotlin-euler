@@ -1,6 +1,5 @@
 package euler.problem0011
 
-import euler.max
 import java.io.File
 import java.util.ArrayList
 
@@ -23,12 +22,12 @@ class Matrix(val size: Int) {
 
   // inspired from http://stefanoricciardi.com/2010/09/21/project-euler-problem-11-in-f/
   fun max(operation: (Int, Int, Int, Int) -> Int): Int {
-    return array(
+    return arrayOf(
         max(horizontally,    operation),
         max(vertically,      operation),
         max(diagonallyRight, operation),
         max(diagonallyLeft,  operation)
-    ).max()
+    ).max()!!
   }
 
   private val horizontally = { i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int ->
@@ -62,12 +61,12 @@ class Matrix(val size: Int) {
       if (rows.hasNext()) {
         if (cols.hasNext()) return traverser(row, cols.next(), operation)
         row = rows.next()
-        cols = (0..numbers.size - 1).iterator()
+        cols = numbers.indices.iterator()
         return traverser(row, cols.next(), operation)
       }
       return null
     }
 
-    return iterate { next() }.max()
+    return sequence() { next() }.max<Int>()!!
   }
 }

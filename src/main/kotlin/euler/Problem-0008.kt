@@ -36,4 +36,4 @@ fun main(args : Array<String>) {
 
 data class Product(val sequence: String, val product: Int)
 
-inline fun Iterator<Product>.max() = fold(Product("", 0)) { a, b -> if (a.product > b.product) a else b }
+inline fun Sequence<Product>.max() = fold(Product("", 0)) { a, b -> if (a.product > b.product) a else b }

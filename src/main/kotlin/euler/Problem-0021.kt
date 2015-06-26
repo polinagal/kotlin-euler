@@ -5,7 +5,7 @@ import euler.sum
 fun main(args: Array<String>) {
   val limit = 10000
   // average execution time of 596.9915 milliseconds over 10 iterations
-  val amicableNumbers = (1..limit).iterator().filter { it.hasAmicablePair() }
+  val amicableNumbers = (1..limit).asSequence().filter { it.hasAmicablePair() }
   println("the sum of all the amicable numbers under $limit is sum$amicableNumbers = ${amicableNumbers.sum()}")
 }
 
@@ -14,4 +14,4 @@ inline fun Int.hasAmicablePair(): Boolean {
   return this != candidate && this == candidate.properDivisors().sum()
 }
 
-inline fun Int.properDivisors() = (1..this - 1).iterator() filter { this % it == 0 }
+inline fun Int.properDivisors() = (1..this - 1).asSequence() filter { this % it == 0 }

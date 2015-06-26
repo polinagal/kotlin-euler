@@ -5,14 +5,13 @@ import java.math.BigInteger
 import java.util.ArrayList
 import java.util.LinkedList
 
-import euler.iterators.zipWith
 import euler.iterators.zipWith3
 
 import kotlin.math.plus
 import kotlin.math.times
 
 // candidates for kotlin
-inline fun Any.toCharList() = toString().iterator().toArrayList()
+inline fun Any.toCharList() = toString().toArrayList()
 inline fun Any.toDigits() = toCharList().map { c: Char -> Character.getNumericValue(c) }
 inline fun Any.isPalindrome() = toCharList() == toCharList().reverse()
 
@@ -34,6 +33,7 @@ inline fun BigInteger.multipleOf(n: Int) = this % bigInt(n) == bigInt(0)
 
 inline fun Int.isPrime() = toLong().isPrime()
 inline fun Long.isPrime() = this > 1 && smallestPrimeFactor() == null
+inline fun Long.isEven() = (this % 2) == 0L
 
 inline fun Int.numberOfDivisors(): Int = toLong().numberOfDivisors()
 inline fun Long.numberOfDivisors(): Int {
@@ -51,19 +51,9 @@ inline fun Long.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toLong() find {
 // candidates for JavaIterables.kt
 
 // sum
-inline fun Array<Int>.sum() = fold(0) { a, b: Int -> a + b }
-inline fun Array<Float>.sum() = fold(0.toFloat()) { a, b: Float -> a + b }
-inline fun Array<Double>.sum() = fold(0.toDouble()) { a, b: Double -> a + b }
-inline fun Array<Long>.sum() = fold(0.toLong()) { a, b: Long -> a + b }
 inline fun Array<BigInteger>.sum() = fold(bigInt(0)) { a, b: BigInteger -> a + b }
-
 inline fun Iterable<BigInteger>.sum() = fold(bigInt(0)) { a, b: BigInteger -> a + b }
-
-inline fun Iterator<Int>.sum() = fold(0) { a, b -> a + b }
-inline fun Iterator<Float>.sum() = fold(0.toFloat()) { a, b -> a + b }
-inline fun Iterator<Double>.sum() = fold(0.toDouble()) { a, b -> a + b }
-inline fun Iterator<Long>.sum() = fold(0.toLong()) { a, b -> a + b }
-inline fun Iterator<BigInteger>.sum() = fold(bigInt(0)) { a, b -> a + b }
+inline fun Sequence<BigInteger>.sum() = fold(bigInt(0)) { a, b -> a + b }
 
 // product
 inline fun Array<Int>.product() = fold(1) { a, b: Int -> a * b }
@@ -78,27 +68,11 @@ inline fun Iterable<Double>.product() = fold(1.toDouble()) { a, b: Double -> a *
 inline fun Iterable<Long>.product() = fold(1.toLong()) { a, b: Long -> a * b }
 inline fun Iterable<BigInteger>.product() = fold(bigInt(1)) { a, b: BigInteger -> a * b }
 
-inline fun Iterator<Int>.product() = fold(1) { a, b -> a * b }
-inline fun Iterator<Float>.product() = fold(1.toFloat()) { a, b -> a * b }
-inline fun Iterator<Double>.product() = fold(1.toDouble()) { a, b -> a * b }
-inline fun Iterator<Long>.product() = fold(1.toLong()) { a, b -> a * b }
-inline fun Iterator<BigInteger>.product() = fold(bigInt(1)) { a, b -> a * b }
-
-// max
-inline fun Iterator<Int>.max() = fold(0) { a, b -> Math.max(a, b) }
-inline fun Iterator<Float>.max() = fold(0.toFloat()) { a, b -> Math.max(a, b) }
-inline fun Iterator<Double>.max() = fold(0.toDouble()) { a, b -> Math.max(a, b) }
-inline fun Iterator<Long>.max() = fold(0.toLong()) { a, b -> Math.max(a, b) }
-
-inline fun Iterable<Int>.max() = fold(0) { a, b: Int -> Math.max(a, b) }
-inline fun Iterable<Float>.max() = fold(0.toFloat()) { a, b: Float -> Math.max(a, b) }
-inline fun Iterable<Double>.max() = fold(0.toDouble()) { a, b: Double -> Math.max(a, b) }
-inline fun Iterable<Long>.max() = fold(0.toLong()) { a, b: Long -> Math.max(a, b) }
-
-inline fun Array<Int>.max() = fold(0) { a, b: Int -> Math.max(a, b) }
-inline fun Array<Float>.max() = fold(0.toFloat()) { a, b: Float -> Math.max(a, b) }
-inline fun Array<Double>.max() = fold(0.toDouble()) { a, b: Double -> Math.max(a, b) }
-inline fun Array<Long>.max() = fold(0.toLong()) { a, b: Long -> Math.max(a, b) }
+inline fun Sequence<Int>.product() = fold(1) { a, b -> a * b }
+inline fun Sequence<Float>.product() = fold(1.toFloat()) { a, b -> a * b }
+inline fun Sequence<Double>.product() = fold(1.toDouble()) { a, b -> a * b }
+inline fun Sequence<Long>.product() = fold(1.toLong()) { a, b -> a * b }
+inline fun Sequence<BigInteger>.product() = fold(bigInt(1)) { a, b -> a * b }
 
 // cartesian products
 
@@ -107,15 +81,12 @@ fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): Triple<T,
   return null
 }
 
-fun <A : Any, B : Any, C : Any> zipWith(f: (A, B) -> C, iterable1: Iterable<A>, iterable2: Iterable<B>): List<C> {
-  return zipWith(f, iterable1.iterator(), iterable2.iterator()).toList()
-}
 
 fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
                                                   iterable1: Iterable<A>,
                                                   iterable2: Iterable<B>,
                                                   iterable3: Iterable<C>): List<D> {
-  return zipWith3(f, iterable1.iterator(), iterable2.iterator(), iterable3.iterator()).toList()
+  return zipWith3(f, iterable1.asSequence(), iterable2.asSequence(), iterable3.asSequence()).toList()
 }
 
 fun <T : Any> Iterable<T>.foldRight1(operation : (T, T) -> T): T {
