@@ -39,4 +39,4 @@ fun writeOut(number : Int) : String = when (number) {
   else -> throw IllegalArgumentException()
 }
 
-inline fun String.countLetters() = toCharList().filterNot { it == ' ' || it == '-' }.size
+inline fun String.countLetters() = toCharList().filterNot { it == ' ' || it == '-' }.size()

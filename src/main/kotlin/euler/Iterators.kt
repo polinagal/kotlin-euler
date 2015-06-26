@@ -118,7 +118,7 @@ fun String.sliding(size: Int): Iterator<String> {
   return iterate { nextWindow() }
 }
 
-fun <T : Any> List<T>.permutations() : Iterator<List<T>> = if (size == 1) SingleIterator(this) else {
+fun <T : Any> List<T>.permutations() : Iterator<List<T>> = if (size() == 1) SingleIterator(this) else {
   val iterator = iterator()
   var head = iterator.next()
   var permutations = (this - head).permutations()
