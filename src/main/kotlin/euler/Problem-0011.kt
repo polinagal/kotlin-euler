@@ -1,6 +1,5 @@
 package euler.problem0011
 
-import euler.max
 import java.io.File
 import java.util.ArrayList
 
@@ -28,7 +27,7 @@ class Matrix(val size: Int) {
         max(vertically,      operation),
         max(diagonallyRight, operation),
         max(diagonallyLeft,  operation)
-    ).max()
+    ).max()!!
   }
 
   private val horizontally = { i: Int, j: Int, operation: (Int, Int, Int, Int) -> Int ->
@@ -68,6 +67,6 @@ class Matrix(val size: Int) {
       return null
     }
 
-    return iterate { next() }.max()
+    return sequence() { next() }.max<Int>()!!
   }
 }
