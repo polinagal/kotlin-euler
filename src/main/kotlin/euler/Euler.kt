@@ -15,12 +15,6 @@ inline fun Any.toCharList() = toString().toArrayList()
 inline fun Any.toDigits() = toCharList().map { c: Char -> Character.getNumericValue(c) }
 inline fun Any.isPalindrome() = toCharList() == toCharList().reverse()
 
-inline fun String.fold(seed: Int, operation: (Int, Int) -> Int): Int {
-  var accumulator = seed
-  for (char in this) accumulator = (operation)(accumulator, char.toInt())
-  return accumulator
-}
-
 // candidates for kotlin.math
 inline fun <T: Number> bigInt(n: T) = BigInteger(n.toString())
 
@@ -87,12 +81,6 @@ fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
                                                   iterable2: Iterable<B>,
                                                   iterable3: Iterable<C>): List<D> {
   return zipWith3(f, iterable1.asSequence(), iterable2.asSequence(), iterable3.asSequence()).toList()
-}
-
-fun <T : Any> Iterable<T>.foldRight1(operation : (T, T) -> T): T {
-  val copy = toLinkedList()
-  val seed = copy.removeLast()
-  return copy.foldRight(seed, operation)
 }
 
 /**

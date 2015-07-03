@@ -4,7 +4,6 @@ import java.io.File
 import java.lang.Math.max
 import java.util.ArrayList
 
-import euler.foldRight1
 import euler.loadRowsFrom
 import euler.zipWith3
 
@@ -16,6 +15,6 @@ fun main(args: Array<String>) {
   val g = { row1: List<Int>, row2: List<Int> -> zipWith3(f, row1, row2, row2.drop(1)) }
 
   // average execution time of 0.4072 milliseconds over 10 iterations
-  val result = triangle.foldRight1(g).first()
+  val result = triangle.reduceRight(g).first()
   println("the maximum total from top to bottom of the triangle is $result")
 }
