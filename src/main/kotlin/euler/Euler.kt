@@ -25,22 +25,6 @@ inline fun Int.multipleOf(n: Int) = toLong() multipleOf n
 inline fun Long.multipleOf(n: Int) = this % n == 0.toLong()
 inline fun BigInteger.multipleOf(n: Int) = this % bigInt(n) == bigInt(0)
 
-inline fun Int.isPrime() = toLong().isPrime()
-inline fun Long.isPrime() = this > 1 && smallestPrimeFactor() == null
-inline fun Long.isEven() = (this % 2) == 0L
-
-inline fun Int.numberOfDivisors(): Int = toLong().numberOfDivisors()
-inline fun Long.numberOfDivisors(): Int {
-  return primeFactors(this).groupBy { it }.values().map { group: List<Long> -> group.size() + 1 }.product()
-}
-
-fun primeFactors(n: Long): List<Long> {
-  val primeFactor = n.smallestPrimeFactor()
-  return if (primeFactor == null) listOf(n) else primeFactor + primeFactors(n / primeFactor)
-}
-
-inline fun Int.smallestPrimeFactor() = toLong().smallestPrimeFactor()?.toInt()
-inline fun Long.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toLong() find { this % it == 0.toLong() }
 
 // candidates for JavaIterables.kt
 
