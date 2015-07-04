@@ -18,15 +18,9 @@ fun main(args : Array<String>) {
 inline fun Long.isTruncatablePrime() = this > 7 && isLeftTruncatablePrime() && isRightTruncatablePrime()
 inline fun Long.isLeftTruncatablePrime() = toString().truncateLeft().allPrimes()
 inline fun Long.isRightTruncatablePrime() = toString().truncateRight().allPrimes()
-inline fun String.truncateLeft() = truncate(this) { it.substring(1) }
-inline fun String.truncateRight() = truncate(this) { it.substring(0, it.length() - 1) }
+inline fun String.truncateLeft() = truncate(this) { it.drop(1) }
+inline fun String.truncateRight() = truncate(this) { it.dropLast(1) }
 inline fun Sequence<String>.allPrimes() = all { parseLong(it).isPrime() }
 
-inline fun truncate(string: String, reduce: (String) -> String): Sequence<String> {
-  return sequence {
-      var current: String? = string
-      var tmp = string
-      when (tmp.length()) { 0 -> current = null; 1 -> tmp = ""; else -> tmp = (reduce)(tmp) }
-      current
-  }
-}
+fun truncate(string: String, reduce: (String) -> String): Sequence<String> =
+        sequence(string, { reduce(it).let { if (it.isEmpty()) null else it } })
