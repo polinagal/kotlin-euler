@@ -46,7 +46,7 @@ fun triangles(): Sequence<Pair<Int, Int>> {
  * Produces the [cartesian product](http://en.wikipedia.org/wiki/Cartesian_product#n-ary_product) as a sequence of ordered pairs of elements lazily obtained
  * from two [[Iterable]] instances
  */
-fun <T: Any> Iterable<T>.times(other: Iterable<T>): Sequence<Pair<T, T>> {
+operator fun <T: Any> Iterable<T>.times(other: Iterable<T>): Sequence<Pair<T, T>> {
   val first = iterator(); var second = other.iterator(); var a: T? = null
 
   fun nextPair(): Pair<T, T>? {

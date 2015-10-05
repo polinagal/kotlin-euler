@@ -19,7 +19,7 @@ inline fun Any.isPalindrome() = toCharList() == toCharList().reversed()
 inline fun <T: Number> bigInt(n: T) = BigInteger(n.toString())
 
 fun factorial(n: Int, product: BigInteger = bigInt(1)): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
-inline fun Int.times(multiplicand: BigInteger) = bigInt(this) * multiplicand
+inline operator fun Int.times(multiplicand: BigInteger) = bigInt(this) * multiplicand
 
 inline fun Int.multipleOf(n: Int) = toLong() multipleOf n
 inline fun Long.multipleOf(n: Int) = this % n == 0.toLong()
@@ -104,15 +104,9 @@ inline fun <T: Any> List<T>.rotations(): List<List<T>> {
   return result
 }
 
-inline fun <T: Any> T.plus(list: List<T>): List<T> {
+inline operator fun <T: Any> T.plus(list: List<T>): List<T> {
   val copy = ArrayList(list)
   copy.add(0, this)
-  return copy
-}
-
-inline fun <T: Any> List<T>.minus(element: T): List<T> {
-  val copy = ArrayList(this)
-  copy.remove(element)
   return copy
 }
 
