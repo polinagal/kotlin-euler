@@ -13,7 +13,7 @@ import kotlin.math.times
 // candidates for kotlin
 inline fun Any.toCharList() = toString().toArrayList()
 inline fun Any.toDigits() = toCharList().map { c: Char -> Character.getNumericValue(c) }
-inline fun Any.isPalindrome() = toCharList() == toCharList().reverse()
+inline fun Any.isPalindrome() = toCharList() == toCharList().reversed()
 
 // candidates for kotlin.math
 inline fun <T: Number> bigInt(n: T) = BigInteger(n.toString())
