@@ -5,7 +5,7 @@ fun main(args : Array<String>) {
 
   // average execution time of 3.9711 milliseconds over 10 iterations
   var result = 0
-  range forEach { result += writeOut(it).countLetters() }
+  range.forEach { result += writeOut(it).countLetters() }
 
   println("$result letters would be required to write out all the numbers from ${range.start} to ${range.end} inclusive")
 }

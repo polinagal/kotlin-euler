@@ -8,7 +8,7 @@ fun main(args : Array<String>) {
   val limit = 1000
 
   // average execution time of 18.9878 milliseconds over 10 iterations
-  val range = (1..limit).asSequence() map { bigInt(it) }
+  val range = (1..limit).asSequence().map { bigInt(it) }
   val series = range.fold(bigInt(0)) { a, b -> a + b.pow(b.toInt()) }
   val digits = series.toString()
 

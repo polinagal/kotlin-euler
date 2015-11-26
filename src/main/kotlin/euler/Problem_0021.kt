@@ -14,4 +14,4 @@ inline fun Int.hasAmicablePair(): Boolean {
   return this != candidate && this == candidate.properDivisors().sum()
 }
 
-inline fun Int.properDivisors() = (1..this - 1).asSequence() filter { this % it == 0 }
+inline fun Int.properDivisors() = (1..this - 1).asSequence().filter { this % it == 0 }

@@ -73,7 +73,7 @@ fun String.grouped(size: Int): Sequence<String> {
   fun nextGroup(): String? {
     if (iterator.hasNext()) {
       val window = StringBuilder()
-      1..size forEach { if (iterator.hasNext()) window.append(iterator.next()) }
+      (1..size).forEach { if (iterator.hasNext()) window.append(iterator.next()) }
       return window.toString()
     }
     return null
@@ -93,8 +93,8 @@ fun String.sliding(size: Int): Sequence<String> {
   val window = StringBuilder()
 
   fun nextWindow(): String? {
-    if (window.length() == 0) {
-      1..size forEach { if (iterator.hasNext()) window.append(iterator.next()) }
+    if (window.length == 0) {
+      (1..size).forEach { if (iterator.hasNext()) window.append(iterator.next()) }
       return window.toString()
     }
     return if (iterator.hasNext()) window.deleteCharAt(0).append(iterator.next()).toString() else null
@@ -103,7 +103,7 @@ fun String.sliding(size: Int): Sequence<String> {
   return sequence { nextWindow() }
 }
 
-fun <T : Any> List<T>.permutations() : Sequence<List<T>> = if (size() == 1) sequenceOf(this) else {
+fun <T : Any> List<T>.permutations() : Sequence<List<T>> = if (size == 1) sequenceOf(this) else {
   val iterator = iterator()
   var head = iterator.next()
   var permutations = (this - head).permutations().iterator()
