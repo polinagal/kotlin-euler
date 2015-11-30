@@ -22,7 +22,7 @@ fun factorial(n: Int, product: BigInteger = bigInt(1)): BigInteger = if (n == 0)
 inline operator fun Int.times(multiplicand: BigInteger) = bigInt(this) * multiplicand
 
 inline fun Int.multipleOf(n: Int) = toLong() multipleOf n
-inline fun Long.multipleOf(n: Int) = this % n == 0.toLong()
+inline infix fun Long.multipleOf(n: Int) = this % n == 0.toLong()
 inline fun BigInteger.multipleOf(n: Int) = this % bigInt(n) == bigInt(0)
 
 inline fun Int.isPrime() = toLong().isPrime()
@@ -40,7 +40,7 @@ fun primeFactors(n: Long): List<Long> {
 }
 
 inline fun Int.smallestPrimeFactor() = toLong().smallestPrimeFactor()?.toInt()
-inline fun Long.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toLong() find { this % it == 0.toLong() }
+inline fun Long.smallestPrimeFactor() = (2..Math.sqrt(toDouble()).toLong()).find { this % it == 0.toLong() }
 
 // candidates for JavaIterables.kt
 
@@ -87,7 +87,7 @@ fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
  * Returns a list starting with the *initial* value followed by the intermediary result of reducing sequential pairs of elements from left to right
  */
 fun <T : Any> Iterable<T>.scanLeft(initial: T, operation: (T, T) -> T): List<T> {
-  val result = arrayListOf<T>(initial)
+  val result = arrayListOf(initial)
   forEach { result.add(operation(result.last(), it)) }
   return result
 }
@@ -97,7 +97,7 @@ fun <T : Any> Iterable<T>.scanLeft(initial: T, operation: (T, T) -> T): List<T> 
 inline fun <T: Any> List<T>.rotations(): List<List<T>> {
   val result = arrayListOf<List<T>>(this)
   val linkedList = LinkedList(this)
-  2..size() forEach {
+  (2..size).forEach {
     linkedList.addLast(linkedList.removeFirst())
     result.add(ArrayList(linkedList))
   }
@@ -120,6 +120,6 @@ fun loadRowsFrom(file: File): List<List<Int>> {
 
 fun <T : Any> T.replicate(n: Int): List<T> {
   val result = ArrayList<T>(n)
-  1..n forEach { result.add(this) }
+  (1..n).forEach { result.add(this) }
   return result
 }
