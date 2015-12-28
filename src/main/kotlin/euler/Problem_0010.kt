@@ -9,5 +9,5 @@ fun main(args : Array<String>) {
   // average execution time of 2.615 seconds over 10 iterations
   val result = primes().takeWhile { it < limit }.toList()
 
-  println("the sum of all the ${result.size()} primes below $limit is ${result.sum()}")
+  println("the sum of all the ${result.size} primes below $limit is ${result.sum()}")
 }

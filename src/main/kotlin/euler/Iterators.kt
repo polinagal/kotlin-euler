@@ -6,8 +6,6 @@ import java.io.File
 import java.math.BigInteger
 import java.util.Scanner
 
-import kotlin.math.plus
-
 fun range(start: Int, increment: Int = 1): Sequence<Int> = sequence(start) { it + increment }
 
 fun primes(): Sequence<Long> = sequence(2L) { previous ->

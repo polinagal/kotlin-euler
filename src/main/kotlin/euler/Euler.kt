@@ -7,9 +7,6 @@ import java.util.LinkedList
 
 import euler.iterators.zipWith3
 
-import kotlin.math.plus
-import kotlin.math.times
-
 // candidates for kotlin
 inline fun Any.toCharList() = toString().toArrayList()
 inline fun Any.toDigits() = toCharList().map { c: Char -> Character.getNumericValue(c) }
@@ -31,7 +28,7 @@ inline fun Long.isEven() = (this % 2) == 0L
 
 inline fun Int.numberOfDivisors(): Int = toLong().numberOfDivisors()
 inline fun Long.numberOfDivisors(): Int {
-  return primeFactors(this).groupBy { it }.values().map { group: List<Long> -> group.size() + 1 }.product()
+  return primeFactors(this).groupBy { it }.values.map { group: List<Long> -> group.size + 1 }.product()
 }
 
 fun primeFactors(n: Long): List<Long> {

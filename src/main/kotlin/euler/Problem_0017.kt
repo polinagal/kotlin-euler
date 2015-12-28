@@ -7,7 +7,7 @@ fun main(args : Array<String>) {
   var result = 0
   range.forEach { result += writeOut(it).countLetters() }
 
-  println("$result letters would be required to write out all the numbers from ${range.start} to ${range.end} inclusive")
+  println("$result letters would be required to write out all the numbers from ${range.start} to ${range.endInclusive} inclusive")
 }
 
 fun writeOut(number : Int) : String = when (number) {
@@ -39,4 +39,4 @@ fun writeOut(number : Int) : String = when (number) {
   else -> throw IllegalArgumentException()
 }
 
-inline fun String.countLetters() = toCharList().filterNot { it == ' ' || it == '-' }.size()
+inline fun String.countLetters() = count { !(it == ' ' || it == '-') }
