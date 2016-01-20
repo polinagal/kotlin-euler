@@ -111,7 +111,7 @@ inline operator fun <T: Any> T.plus(list: List<T>): List<T> {
 
 fun loadRowsFrom(file: File): List<List<Int>> {
   val rows = ArrayList<List<Int>>()
-  file.forEachLine(charset = "UTF-8") { rows.add(it.split(" ").map { it.toInt() }) }
+  file.forEachLine(Charsets.UTF_8) { rows.add(it.split(" ").map { it.toInt() }) }
   return rows
 }
 

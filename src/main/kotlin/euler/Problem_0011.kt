@@ -6,7 +6,7 @@ import java.util.ArrayList
 fun main(args: Array<String>) {
   val matrix = Matrix(20)
 
-  File("src/main/resources/Problem-0011.txt").forEachLine(charset = "UTF-8") {
+  File("src/main/resources/Problem-0011.txt").forEachLine(Charsets.UTF_8) {
     matrix.add(it.split(" ").map { it.toInt() })
   }
 
