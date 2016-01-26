@@ -1,4 +1,4 @@
-package euler
+package euler.problem0032
 
 import java.util.HashSet
 
@@ -32,7 +32,7 @@ fun main(args: Array<String>) {
         answer += product;
     }
 
-    System.out.println("Answer: "+answer);
+    println("Answer: "+answer);
 }
 
 fun isPandigital (number:Long) : Boolean

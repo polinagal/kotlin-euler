@@ -1,4 +1,4 @@
-package euler
+package euler.problem0031
 /**
  * Problem 31
  * In England the currency is made up of pound and pence and there are
