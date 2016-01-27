@@ -8,7 +8,7 @@ import java.util.LinkedList
 import euler.iterators.zipWith3
 
 // candidates for kotlin
-inline fun Any.toCharList() = toString().toArrayList()
+inline fun Any.toCharList() = toString().toList()
 inline fun Any.toDigits() = toCharList().map { c: Char -> Character.getNumericValue(c) }
 inline fun Any.isPalindrome() = toCharList() == toCharList().reversed()
 

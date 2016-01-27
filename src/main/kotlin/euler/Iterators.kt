@@ -6,9 +6,9 @@ import java.io.File
 import java.math.BigInteger
 import java.util.Scanner
 
-fun range(start: Int, increment: Int = 1): Sequence<Int> = sequence(start) { it + increment }
+fun range(start: Int, increment: Int = 1): Sequence<Int> = generateSequence(start) { it + increment }
 
-fun primes(): Sequence<Long> = sequence(2L) { previous ->
+fun primes(): Sequence<Long> = generateSequence(2L) { previous ->
   var number = previous + if (previous.isEven()) 1 else 2
   while (!number.isPrime()) number += 2
   number
@@ -26,7 +26,7 @@ fun fibonacciWithIndices(): Sequence<FibonacciTerm> {
     return result
   }
 
-  return sequence { nextFibonacci() }
+  return generateSequence { nextFibonacci() }
 }
 
 fun triangles(): Sequence<Pair<Int, Int>> {
@@ -37,7 +37,7 @@ fun triangles(): Sequence<Pair<Int, Int>> {
     return Pair(n, sum)
   }
 
-  return sequence() { nextTriangle() }
+  return generateSequence { nextTriangle() }
 }
 
 /**
@@ -57,7 +57,7 @@ operator fun <T: Any> Iterable<T>.times(other: Iterable<T>): Sequence<Pair<T, T>
     return null
   }
 
-  return sequence { nextPair() }
+  return generateSequence { nextPair() }
 }
 
 /**
@@ -77,7 +77,7 @@ fun String.grouped(size: Int): Sequence<String> {
     return null
   }
 
-  return sequence { nextGroup() }
+  return generateSequence { nextGroup() }
 }
 
 /**
@@ -98,7 +98,7 @@ fun String.sliding(size: Int): Sequence<String> {
     return if (iterator.hasNext()) window.deleteCharAt(0).append(iterator.next()).toString() else null
   }
 
-  return sequence { nextWindow() }
+  return generateSequence { nextWindow() }
 }
 
 fun <T : Any> List<T>.permutations() : Sequence<List<T>> = if (size == 1) sequenceOf(this) else {
@@ -114,13 +114,13 @@ fun <T : Any> List<T>.permutations() : Sequence<List<T>> = if (size == 1) sequen
     } else null
   }
 
-  sequence { nextPermutation() }
+  generateSequence { nextPermutation() }
 }
 
 fun File.scan(pattern : String = ".*", delimiter: String, encoding: String = "UTF-8"): Sequence<String> {
   val scanner = Scanner(this, encoding)
   scanner.useDelimiter(delimiter)
-  return sequence { if (scanner.hasNext(pattern)) scanner.next(pattern) else { scanner.close(); null } }
+  return generateSequence { if (scanner.hasNext(pattern)) scanner.next(pattern) else { scanner.close(); null } }
 }
 
 fun <T : Any> Iterator<T>.get(index: Int): T {
@@ -136,7 +136,7 @@ fun <A : Any, B : Any, C : Any, D : Any> zipWith3(f: (A, B, C) -> D,
   val it1 = s1.iterator()
   val it2 = s2.iterator()
   val it3 = s3.iterator()
-  return sequence() {
+  return generateSequence {
     if (it1.hasNext() && it2.hasNext() && it3.hasNext()) f(it1.next(), it2.next(), it3.next()) else null
   }
 }

@@ -67,6 +67,6 @@ class Matrix(val size: Int) {
       return null
     }
 
-    return sequence() { next() }.max()!!
+    return generateSequence { next() }.max()!!
   }
 }

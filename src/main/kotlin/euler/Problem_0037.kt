@@ -23,4 +23,4 @@ inline fun String.truncateRight() = truncate(this) { it.dropLast(1) }
 inline fun Sequence<String>.allPrimes() = all { parseLong(it).isPrime() }
 
 fun truncate(string: String, reduce: (String) -> String): Sequence<String> =
-        sequence(string, { reduce(it).let { if (it.isEmpty()) null else it } })
+        generateSequence(string, { reduce(it).let { if (it.isEmpty()) null else it } })
