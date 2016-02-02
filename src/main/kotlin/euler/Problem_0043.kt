@@ -2,11 +2,6 @@ package euler.problem0043
 
 import java.util.*
 
-
-/**
- * Created by polina on 27/01/2016.
- */
-
 /*
   *
   * The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, but it also has a rather interesting sub-string divisibility property.
@@ -25,6 +20,12 @@ import java.util.*
 
 fun main(args: Array<String>) {
 
+    //d6 is definitely 5
+    //because d4d5d6 is divisible by 5
+    //so d6 may be either 5 or 0
+    //and if d6 were 0 so d6d7d8 would be 0d7d8,
+    //that can only be divisible by 11 when d7=d8
+    //which is impossible according to the task
 
     println("Start")
     println("Possible (5) d6d7d8:")
@@ -137,7 +138,7 @@ fun main(args: Array<String>) {
         sum+= i.toLong()
     }
 
-    print ("Answer:\n" +sum)
+    print ("Answer:\n  $sum")
 
 }
 
@@ -157,5 +158,4 @@ fun isPandigital (number:String) : Boolean
         count[number.get(i-1).toString().toInt()] = 1
     }
     return true
-
 }

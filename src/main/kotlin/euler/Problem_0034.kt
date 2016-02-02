@@ -1,6 +1,6 @@
 package euler.problem0034
 
-/*
+/**
  * 145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
  * Find the sum of all numbers which are equal to the sum of the
  * factorial of their digits.
@@ -11,11 +11,11 @@ fun main(args: Array<String>) {
     var sum:Int = 0;
     val fact:IntArray = intArrayOf(1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)
 
-    /*
-     * число 2540161 выбрано в качестве верхней границы поиска,
-     * так как оно является максимально возможной суммой факториалов
-     * семизначного числа 9!*7=2540160, а 9!*8 = 2903040,
-     * что тоже является семизначным числом и не подходит.
+    /**
+     * 9!*7 = 2540160
+     * 9!*8 = 2903040
+     *
+     * so the upper bound of the search range is 2540160
      */
 
     for (i in 10..2540160) {
@@ -31,6 +31,6 @@ fun main(args: Array<String>) {
             println (tmpSum)
         }
     }
-    println ("Answer:" + sum)
+    println ("Answer: $sum")
 
 }

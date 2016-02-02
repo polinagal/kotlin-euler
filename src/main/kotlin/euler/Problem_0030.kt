@@ -1,11 +1,6 @@
 package euler.problem0030
 
 
-/**
- * Created by polina on 27/01/2016.
- */
-
-
 fun main(args: Array<String>) {
     var sum:Int = 0
     val fifthPow:IntArray = intArrayOf(0, 1, 32, 243, 1024, 3125, 7776, 16807, 32768, 59049)

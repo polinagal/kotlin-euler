@@ -1,4 +1,5 @@
 package euler.problem0031
+
 /**
  * Problem 31
  * In England the currency is made up of pound and pence and there are
@@ -10,11 +11,9 @@ package euler.problem0031
  * used: http://www.algorithmist.com/index.php/Coin_Change
  */
 
-fun main(args: Array<String>)
-{
+fun main(args: Array<String>) {
     val values: IntArray = intArrayOf(1, 2, 5, 10, 20, 50, 100, 200)
-    println (change(200,values.size-1,values))
-
+        println (change(200,values.size-1,values))
 }
 
 fun change(target:Int, index:Int,  values:IntArray) :Int {
