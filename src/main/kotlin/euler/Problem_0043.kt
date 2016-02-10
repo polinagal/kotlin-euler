@@ -1,5 +1,6 @@
 package euler.problem0043
 
+import euler.toDigits
 import java.util.*
 
 /*
@@ -20,142 +21,105 @@ import java.util.*
 
 fun main(args: Array<String>) {
 
-    //d6 is definitely 5
+    //d6 is 5
     //because d4d5d6 is divisible by 5
     //so d6 may be either 5 or 0
-    //and if d6 were 0 so d6d7d8 would be 0d7d8,
+    //if d6 were 0 so d6d7d8 would be 0d7d8,
     //that can only be divisible by 11 when d7=d8
     //which is impossible according to the task
+
+    val startTime = System.currentTimeMillis()
+    val range = IntArray(10, {i -> i})
 
     println("Start")
     println("Possible (5) d6d7d8:")
     var d6d7d8: ArrayList<String> = ArrayList()
 
-    for (i in 501..598) {
-        if (isPandigital(i.toString()) && (i % 11 == 0)) {
-            d6d7d8.add(i.toString())
-            println(i)
+    (501..598).forEach {
+        if (isPandigital(it.toLong(),range) && (it % 11 == 0)) {
+            d6d7d8.add(it.toString())
+            println(it)
         }
     }
 
     println("Possible d6d7d8_d9:")
-    var d6d7d8d9: ArrayList<String> = ArrayList()
-    for (i in 1..d6d7d8.size) {
-        for (d9 in 0..9) {
-            val newNumber: String = d6d7d8.get(i - 1) + d9
-            if (isPandigital(newNumber) && ((newNumber.toInt() - 5000) % 13 == 0)) {
-                d6d7d8d9.add(newNumber)
-                println(newNumber)
-            }
-        }
-    }
+    var d6d7d8d9 = addDigitToEnd(d6d7d8,13)
+
     println("Possible d6d7d8d9_d10:")
-    var d6d7d8d9d10: ArrayList<String> = ArrayList()
-    for (i in 1..d6d7d8d9.size) {
-        val d8d9: String = d6d7d8d9.get(i - 1).get(2).toString() +
-                d6d7d8d9.get(i - 1).get(3).toString()
-        for (d10 in 0..9) {
-            val newNumber: String = d6d7d8d9.get(i - 1)  + d10
-            val newThree:Int = d8d9.toInt() * 10 + d10
-            if (isPandigital(newNumber) && ((d8d9.toInt() * 10 + d10) % 17 == 0)) {
-                d6d7d8d9d10.add(newNumber)
-                println(newNumber)
-            }
-        }
-    }
+    var d6d7d8d9d10 = addDigitToEnd(d6d7d8d9,17)
 
     println("Possible d5_d6d7d8d9d10:")
-    var d5d6d7d8d9d10: ArrayList<String> = ArrayList()
-    for (i in 1..d6d7d8d9d10.size) {
-        val d6d7: String = d6d7d8d9d10.get(i - 1).get(0).toString() +
-                           d6d7d8d9d10.get(i - 1).get(1).toString()
-        for (d5 in 0..9) {
-            val newNumber:String = d5.toString() + d6d7d8d9d10.get(i - 1)
-            if (isPandigital(newNumber) && ((d5 * 100 + d6d7.toInt()) % 7 == 0)) {
-                d5d6d7d8d9d10.add(newNumber)
-                println(newNumber)
-            }
-        }
-    }
+    var d5d6d7d8d9d10 = addDigitToStart(d6d7d8d9d10,7)
+
     println("Possible d4_d5d6d7d8d9d10:")
-    var d4d5d6d7d8d9d10: ArrayList<String> = ArrayList()
-    for (i in 1..d5d6d7d8d9d10.size) {
-        val d5d6: String = d5d6d7d8d9d10.get(i - 1).get(0).toString() +
-                           d5d6d7d8d9d10.get(i - 1).get(1).toString()
-        for (d4 in 0..9 step 2) {
-            val newNumber: String = d4.toString() + d5d6d7d8d9d10.get(i - 1)
-
-            if (isPandigital(newNumber) && ((d4 * 100 + d5d6.toInt()) % 5 == 0)) {
-
-                    d4d5d6d7d8d9d10.add(newNumber)
-                    println(newNumber)
-                }
-            }
-        }
+    var d4d5d6d7d8d9d10 = addDigitToStart(d5d6d7d8d9d10,5)
 
     println("Possible d3_d4d5d6d7d8d9d10:")
-    var d3d4d5d6d7d8d9d10: ArrayList<String> = ArrayList()
-    for (i in 1..d4d5d6d7d8d9d10.size) {
-        val d4d5: String = d4d5d6d7d8d9d10.get(i - 1).get(0).toString() +
-                           d4d5d6d7d8d9d10.get(i - 1).get(1).toString()
-        for (d3 in 0..9) {
-            val newNumber: String = d3.toString() + d4d5d6d7d8d9d10.get(i - 1)
-            if (isPandigital(newNumber) && ((d3 * 100 + d4d5.toInt()) % 3 == 0)) {
-                d3d4d5d6d7d8d9d10.add(newNumber)
-                println(newNumber)
-            }
-        }
-    }
+    var d3d4d5d6d7d8d9d10 = addDigitToStart(d4d5d6d7d8d9d10,3)
 
     println("Possible d2_d3d4d5d6d7d8d9d10:")
-    var d2d3d4d5d6d7d8d9d10: ArrayList<String> = ArrayList()
-    for (i in 1..d3d4d5d6d7d8d9d10.size) {
-        val d4d5: String = d3d4d5d6d7d8d9d10.get(i - 1).get(0).toString() +
-                d3d4d5d6d7d8d9d10.get(i - 1).get(1).toString()
-        for (d2 in 0..9) {
-            val newNumber: String = d2.toString() + d3d4d5d6d7d8d9d10.get(i - 1)
-            if (isPandigital(newNumber) && ((d2 * 100 + d4d5.toInt()) % 2 == 0)) {
-                d2d3d4d5d6d7d8d9d10.add(newNumber)
-                println(newNumber)
-            }
-        }
-    }
+    var d2d3d4d5d6d7d8d9d10 = addDigitToStart(d3d4d5d6d7d8d9d10,2)
 
     println("Possible d1_d2d3d4d5d6d7d8d9d10:")
-    var d1d2d3d4d5d6d7d8d9d10: ArrayList<String> = ArrayList()
-    for (i in 1..d2d3d4d5d6d7d8d9d10.size) {
+    var d1d2d3d4d5d6d7d8d9d10  = addDigitToStart(d2d3d4d5d6d7d8d9d10,1)
 
-        for (d1 in 0..9) {
-            val newNumber: String = d1.toString() + d2d3d4d5d6d7d8d9d10.get(i - 1)
-            if (isPandigital(newNumber) ) {
-                d1d2d3d4d5d6d7d8d9d10.add(newNumber)
-                println(newNumber)
-            }
-        }
-    }
-    var sum:Long = 0
-    for (i in d1d2d3d4d5d6d7d8d9d10) {
-        sum+= i.toLong()
-    }
+    val sum = d1d2d3d4d5d6d7d8d9d10.fold(0L) {a,b -> a.toLong()+b.toLong()}
 
-    print ("Answer:\n  $sum")
+    println ("Answer: $sum")
+    println("Elapsed time: "+(System.currentTimeMillis() - startTime)) //takes very long time about 2 mins
 
 }
 
-fun isPandigital (number:String) : Boolean
-{
-    var size = number.length
+fun addDigitToStart (searchRange: ArrayList<String>, divisor:Int) : ArrayList<String> {
+    val pandigitalRange = IntArray(10, {i -> i})
+    var newArrayList:  ArrayList<String> = ArrayList()
+    searchRange.forEach {
+        val dbdc: String = it.get(0).toString() +
+               it.get(1).toString()
+        for (da in 0..9) {
+            val newNumber: String = da.toString() + it
+            if (isPandigital(newNumber.toLong(),pandigitalRange) && ((da * 100 + dbdc.toInt()) % divisor == 0)) {
+                newArrayList.add(newNumber)
+                println(newNumber)
+            }
+        }
+    }
+    return newArrayList
+}
 
-    if (size > 10)
-        return false
-    if (size==1)
-        return true
+fun addDigitToEnd (searchRange: ArrayList<String>, divisor:Int) : ArrayList<String> {
+    var newArrayList:  ArrayList<String> = ArrayList()
+    val pandigitalRange = IntArray(10, {i -> i})
+    searchRange.forEach {
+        val dadb: String = it.get(it.length - 2).toString() +
+                it.get(it.length-1).toString()
+        for (dc in 0..9) {
+            val newNumber = it + dc.toString()
+            if (isPandigital(newNumber.toLong(),pandigitalRange) && ((dadb.toInt() * 10 + dc) % divisor == 0)) {
+                newArrayList.add(newNumber)
+                println(newNumber)
+            }
+        }
+    }
+    return newArrayList
+}
+
+fun isPandigital (number: Long, range:IntArray) : Boolean {
     var count = IntArray(10)
 
-    for (i in 1..number.length) {
-        if (count[number.get(i-1).toString().toInt()] == 1)
+    val digits = number.toDigits()
+
+    if (digits.size == 1)
+        return true
+    if (digits.size > 10)
+        return false
+    digits.forEach {
+        if (range.contains(it)) {
+            if ( count[it] != 0) //if current digit is in range and was never seen before
+                return false
+            else count[it] = 1
+        } else //if range doesnt contain current digit
             return false
-        count[number.get(i-1).toString().toInt()] = 1
     }
     return true
 }
