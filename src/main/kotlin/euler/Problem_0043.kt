@@ -1,5 +1,6 @@
 package euler.problem0043
 
+import euler.isPandigital
 import euler.toDigits
 import java.util.*
 
@@ -28,7 +29,6 @@ fun main(args: Array<String>) {
     //that can only be divisible by 11 when d7=d8
     //which is impossible according to the task
 
-    val startTime = System.currentTimeMillis()
     val range = IntArray(10, {i -> i})
 
     println("Start")
@@ -66,7 +66,6 @@ fun main(args: Array<String>) {
     val sum = d1d2d3d4d5d6d7d8d9d10.fold(0L) {a,b -> a.toLong()+b.toLong()}
 
     println ("Answer: $sum")
-    println("Elapsed time: "+(System.currentTimeMillis() - startTime)) //takes very long time about 2 mins
 
 }
 
@@ -102,24 +101,4 @@ fun addDigitToEnd (searchRange: ArrayList<String>, divisor:Int) : ArrayList<Stri
         }
     }
     return newArrayList
-}
-
-fun isPandigital (number: Long, range:IntArray) : Boolean {
-    var count = IntArray(10)
-
-    val digits = number.toDigits()
-
-    if (digits.size == 1)
-        return true
-    if (digits.size > 10)
-        return false
-    digits.forEach {
-        if (range.contains(it)) {
-            if ( count[it] != 0) //if current digit is in range and was never seen before
-                return false
-            else count[it] = 1
-        } else //if range doesnt contain current digit
-            return false
-    }
-    return true
 }

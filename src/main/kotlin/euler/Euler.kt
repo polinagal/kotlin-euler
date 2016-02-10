@@ -120,3 +120,25 @@ fun <T : Any> T.replicate(n: Int): List<T> {
   (1..n).forEach { result.add(this) }
   return result
 }
+
+
+//
+fun isPandigital (number: Long, range:IntArray) : Boolean {
+  var count = IntArray(10)
+
+  val digits = number.toDigits()
+
+  if (digits.size == 1)
+    return true
+  if (digits.size > 10)
+    return false
+  digits.forEach {
+    if (range.contains(it)) {
+      if ( count[it] != 0) //if current digit is in range and was never seen before
+        return false
+      else count[it] = 1
+    } else //if range doesnt contain current digit
+      return false
+  }
+  return true
+}

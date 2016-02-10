@@ -1,5 +1,6 @@
 package euler.problem0032
 
+import euler.isPandigital
 import euler.toDigits
 import java.util.*
 import java.lang.System
@@ -17,14 +18,13 @@ HINT: Some products can be obtained in more than one way so be sure to only incl
 
 fun main(args: Array<String>) {
 
-    var startTime = System.currentTimeMillis()
     val range = IntArray(9, {i -> i+1})
     var products: HashSet<Int> = HashSet();
     for (multiplicand in 1..10000) {
         for (multiplier in 1..10000) {
             var product: Int = multiplicand * multiplier;
             var line:String = product.toString() + multiplicand.toString() + multiplier.toString()
-            if (isPandigital(java.lang.Long.parseLong(line), range)) {
+            if (isPandigital(line.toLong(), range)) {
                 products.add(product)
             }
         }
@@ -32,26 +32,5 @@ fun main(args: Array<String>) {
     val answer = products.fold(0) {a,b -> a+b}
 
     println("Answer: $answer")
-    println("elapsed time: "+(System.currentTimeMillis() - startTime)) //takes very long time about 2 mins
-
 }
 
-fun isPandigital (number: Long, range:IntArray) : Boolean {
-    var count = IntArray(10)
-
-    val digits = number.toDigits()
-
-    if (digits.size == 1)
-        return true
-    if (digits.size > 10)
-        return false
-    digits.forEach {
-        if (range.contains(it)) {
-            if ( count[it] != 0) //if current digit is in range and was never seen before
-                return false
-            else count[it] = 1
-        } else //if range doesnt contain current digit
-            return false
-    }
-    return true
-}
