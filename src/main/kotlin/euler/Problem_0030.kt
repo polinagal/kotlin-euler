@@ -4,7 +4,7 @@ import euler.toDigits
 
 
 fun main(args: Array<String>) {
-    var sum:Int = 0
+    var sum  = 0
     val fifthPow = intArrayOf(0, 1, 32, 243, 1024, 3125, 7776, 16807, 32768, 59049)
 
     /*
@@ -15,10 +15,8 @@ fun main(args: Array<String>) {
 
     for (i in 10..354294) {
         val digits = i.toDigits()
-        var tmpSum = 0
-        digits.forEach {
-            tmpSum+=fifthPow[it]
-        }
+
+        var tmpSum = digits.fold(0) {sum,next -> sum+fifthPow[next]}
 
         if (tmpSum == i) {
             sum += tmpSum

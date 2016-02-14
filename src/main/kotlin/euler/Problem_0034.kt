@@ -1,6 +1,6 @@
 package euler.problem0034
 
-import euler.factorial
+import euler.toDigits
 
 /**
  * 145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
@@ -10,8 +10,8 @@ import euler.factorial
  */
 
 fun main(args: Array<String>) {
-    var sum:Int = 0;
-    val fact:IntArray = intArrayOf(1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)
+    var sum = 0;
+    val fact  = intArrayOf(1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)
 
     /**
      * 9!*7 = 2540160
@@ -21,13 +21,11 @@ fun main(args: Array<String>) {
      */
 
     for (i in 10..2540160) {
-        var tmp: Int = i
-        var tmpSum:Int = 0
 
-        while (tmp>0) {
-            tmpSum += fact[tmp%10]
-            tmp /= 10
-        }
+        val digits = i.toDigits()
+
+        var tmpSum = digits.fold(0) {sum,next -> sum+fact[next]}
+
         if (tmpSum == i) {
             sum += tmpSum
             println (tmpSum)

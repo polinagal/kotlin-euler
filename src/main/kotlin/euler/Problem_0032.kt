@@ -1,9 +1,7 @@
 package euler.problem0032
 
 import euler.isPandigital
-import euler.toDigits
 import java.util.*
-import java.lang.System
 
 /**
  * We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once; for example, the 5-digit number, 15234, is 1 through 5 pandigital.
@@ -17,6 +15,9 @@ HINT: Some products can be obtained in more than one way so be sure to only incl
 
 
 fun main(args: Array<String>) {
+
+    assert(isPandigital(123456789,IntArray(9, {i -> i+1})))
+    assert(!isPandigital(1234567890,IntArray(9, {i -> i+1})))
 
     val range = IntArray(9, {i -> i+1})
     var products: HashSet<Int> = HashSet();

@@ -122,7 +122,7 @@ fun <T : Any> T.replicate(n: Int): List<T> {
 }
 
 
-//
+//added here because this function is used to solve multiple problems
 fun isPandigital (number: Long, range:IntArray) : Boolean {
   var count = IntArray(10)
 
@@ -142,3 +142,4 @@ fun isPandigital (number: Long, range:IntArray) : Boolean {
   }
   return true
 }
+

@@ -22,6 +22,7 @@ import java.util.*
 
 fun main(args: Array<String>) {
 
+
     //d6 is 5
     //because d4d5d6 is divisible by 5
     //so d6 may be either 5 or 0
@@ -73,8 +74,8 @@ fun addDigitToStart (searchRange: ArrayList<String>, divisor:Int) : ArrayList<St
     val pandigitalRange = IntArray(10, {i -> i})
     var newArrayList:  ArrayList<String> = ArrayList()
     searchRange.forEach {
-        val dbdc: String = it.get(0).toString() +
-               it.get(1).toString()
+        val dbdc: String = it[0].toString() +
+               it[1].toString()
         for (da in 0..9) {
             val newNumber: String = da.toString() + it
             if (isPandigital(newNumber.toLong(),pandigitalRange) && ((da * 100 + dbdc.toInt()) % divisor == 0)) {

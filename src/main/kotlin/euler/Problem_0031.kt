@@ -13,7 +13,9 @@ package euler.problem0031
 
 fun main(args: Array<String>) {
     val values: IntArray = intArrayOf(1, 2, 5, 10, 20, 50, 100, 200)
-        println (change(200,values.size-1,values))
+    assert(change(4, 2, intArrayOf(1,2,3)).equals(3))
+
+    println (change(200,values.size-1,values))
 }
 
 fun change(target:Int, index:Int,  values:IntArray) :Int {
